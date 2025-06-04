@@ -44,6 +44,9 @@
             --elevation-01: 0 2px 1px -1px rgba(0,0,0,0.2), 0 1px 1px 0 rgba(0,0,0,0.14), 0 1px 3px 0 rgba(0,0,0,0.12);
             --elevation-04: 0 2px 4px -1px rgba(0,0,0,0.2), 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12);
             --elevation-08: 0 5px 5px -3px rgba(0,0,0,0.2), 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12);
+            
+            --primary-color-rgb: 98,0,238;
+            --secondary-color-rgb: 3,218,198;
         }
 
         html { scroll-behavior: smooth; }
@@ -56,6 +59,31 @@
             color: var(--text-primary-light);
             transition: background-color 0.3s, color 0.3s;
         }
+        .title-page {
+            padding: 40px 20px 20px 20px;
+            margin-bottom: 20px;
+        }
+        .title-page h1 {
+            text-align: left;
+            font-size: 2.5em; 
+            font-weight: 400;
+            color: var(--text-primary-light);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .author-note {
+            font-style: italic;
+            color: var(--text-secondary-light);
+            font-size: 1em;
+            margin-bottom: 20px;
+        }
+        body.dark-theme .title-page h1 {
+            color: var(--text-primary-dark);
+        }
+        body.dark-theme .author-note {
+            color: var(--text-secondary-dark);
+        }
+
         .container {
             padding: 20px;
             transition: margin-left 0.3s;
@@ -129,7 +157,7 @@
             border-radius: 0 24px 24px 0;
         }
         .sidebar-content li a:hover, .sidebar-content li a.active {
-            background-color: rgba(var(--primary-color-rgb, 98,0,238), 0.08);
+            background-color: rgba(var(--primary-color-rgb), 0.08);
         }
          .sidebar-content li a.active {
              color: var(--primary-color);
@@ -162,13 +190,6 @@
         }
         .menu-btn .material-icons { font-size: 24px; }
 
-
-        .main-content h1 {
-            text-align: center;
-            font-weight: 400;
-            color: var(--text-primary-light);
-            margin-top: 60px; 
-        }
         .main-content h2 {
             font-weight: 500;
             color: var(--text-primary-light);
@@ -188,42 +209,102 @@
         .toc {
             background-color: var(--surface-color-light);
             border: 1px solid var(--divider-light);
-            border-radius: 4px;
-            padding: 16px;
+            border-radius: 8px; 
+            padding: 20px;
             margin: 24px auto;
-            width: 90%;
-            max-width: 700px; /* Збільшено для більшої кількості тем */
-            box-shadow: var(--elevation-01);
-        }
-        .toc h3 { margin-top: 0; text-align: center; font-weight: 500; }
-        .toc ul {
-            list-style-type: none;
-            padding-left: 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-        }
-        .toc li { margin-bottom: 0; }
-        .toc li a {
-            display: inline-block;
-            text-decoration: none;
-            background-color: var(--primary-color);
-            color: var(--on-primary-color-light);
-            padding: 8px 12px; /* Трохи менші кнопки для більшої кількості */
-            border-radius: 4px;
-            transition: background-color 0.2s, box-shadow 0.2s;
-            text-transform: uppercase;
-            font-weight: 500;
-            font-size: 13px; /* Трохи менший шрифт */
-            box-shadow: var(--elevation-01);
-            border: none; 
-            cursor: pointer;
-        }
-        .toc li a:hover {
-            background-color: var(--primary-variant-color);
+            width: 100%;
+            max-width: 80%; 
             box-shadow: var(--elevation-04);
         }
+        .toc h3 { 
+            margin-top: 0; 
+            text-align: flex-start; 
+            font-weight: 500; 
+            color: var(--primary-color);
+            margin-bottom: 16px;
+        }
+        .toc ul {
+            list-style-type: decimal; 
+            padding-left: 20px; 
+            display: block; 
+            columns: 2; 
+            column-gap: 20px;
+        }
+        .toc li { 
+            margin-bottom: 8px; 
+            padding-left: 5px; 
+        }
+        .toc li a {
+            text-decoration: none;
+            background-color: transparent; 
+            color: var(--primary-color); 
+            padding: 4px 0; 
+            border-radius: 0; 
+            text-transform: none; 
+            font-weight: 400; 
+            font-size: 1em; 
+            box-shadow: none; 
+            border: none; 
+            cursor: pointer;
+            display: inline; 
+        }
+        .toc li a:hover {
+            text-decoration: underline; 
+            background-color: transparent;
+            box-shadow: none;
+            color: var(--primary-variant-color);
+        }
+        @media (max-width: 600px) { 
+            .toc ul {
+                columns: 1;
+            }
+        }
+
+        .important-info-box {
+            background-color: #e3f2fd; 
+            border-left: 4px solid var(--primary-color);
+            padding: 12px 16px;
+            margin-top: 24px;
+            margin-bottom: 24px;
+            border-radius: 4px;
+            box-shadow: var(--elevation-01);
+        }
+        .important-info-box h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+            font-weight: 700; 
+            font-size: 1.1em;
+        }
+        .important-info-box ul {
+            padding-left: 20px; 
+            margin-bottom: 0;
+        }
+        .important-info-box li {
+            margin-bottom: 6px; 
+        }
+        
+        .explanation-box {
+            background-color: #f0f4c3; 
+            border-left: 4px solid #7cb342; 
+            padding: 12px 16px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            box-shadow: var(--elevation-01);
+        }
+        .explanation-box h5 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: #558b2f; 
+            font-weight: 700;
+            font-size: 1.05em;
+        }
+        .explanation-box p {
+            margin-bottom: 0;
+            font-size: 0.95em;
+        }
+
 
         /* Dark theme styles */
         body.dark-theme {
@@ -250,7 +331,7 @@
             color: var(--secondary-color);
         }
          body.dark-theme .sidebar-content li a:hover, body.dark-theme .sidebar-content li a.active {
-             background-color: rgba(var(--secondary-color-rgb, 3,218,198), 0.08);
+             background-color: rgba(var(--secondary-color-rgb), 0.08);
          }
          body.dark-theme .sidebar-content li a.active {
              color: var(--secondary-color);
@@ -261,10 +342,9 @@
             color: var(--text-primary-dark);
         }
          body.dark-theme .menu-btn:hover {
-             background-color: rgba(224, 224, 224, 0.08); /* Зміна кольору при наведенні для темної теми */
+             background-color: rgba(224, 224, 224, 0.08); 
         }
 
-        body.dark-theme .main-content h1,
         body.dark-theme .main-content h2 {
             color: var(--text-primary-dark);
             border-bottom-color: var(--divider-dark);
@@ -276,13 +356,31 @@
             background-color: var(--surface-color-dark);
             border-color: var(--divider-dark);
         }
+        body.dark-theme .toc h3 {
+            color: var(--secondary-color);
+        }
         body.dark-theme .toc li a {
-            background-color: var(--secondary-color);
-            color: var(--on-primary-color-dark);
+            color: var(--secondary-color);
         }
         body.dark-theme .toc li a:hover {
-            background-color: #01BDAF; 
+            color: #80deea; 
         }
+        
+        body.dark-theme .important-info-box {
+            background-color: rgba(var(--primary-color-rgb), 0.15); 
+            border-left-color: var(--primary-color);
+        }
+        body.dark-theme .important-info-box h4 {
+            color: var(--primary-color);
+        }
+        body.dark-theme .explanation-box {
+            background-color: rgba(var(--secondary-color-rgb), 0.1); 
+            border-left-color: var(--secondary-color);
+        }
+        body.dark-theme .explanation-box h5 {
+            color: var(--secondary-color);
+        }
+
 
         .theme-switch-wrapper {
             display: flex;
@@ -333,7 +431,7 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.14), 0 2px 1px -1px rgba(0,0,0,0.12);
         }
         body.dark-theme .slider:before {
-            background-color: #424242; /* Темніша кулька для темної теми, якщо неактивна */
+            background-color: #424242; 
         }
         input:checked + .slider {
             background-color: var(--secondary-color);
@@ -360,13 +458,15 @@
             .menu-btn-container {
                 display: none;
             }
-             .sidebar-close-btn { /* Ховаємо кнопку закриття на десктопі */
+             .sidebar-close-btn { 
                 display: none !important;
             }
         }
     </style>
 </head>
 <body>
+
+
 
 <div class="menu-btn-container">
     <button class="menu-btn" id="menuToggleBtn" aria-label="Відкрити меню">
@@ -383,24 +483,24 @@
     </div>
     <div class="sidebar-content">
         <ul>
-            <li><a href="#topic1" onclick="closeSidebarAndSetActive(this)">1. Відношення подільності...</a></li>
-            <li><a href="#topic2" onclick="closeSidebarAndSetActive(this)">2. Прості та складені числа...</a></li>
-            <li><a href="#topic3" onclick="closeSidebarAndSetActive(this)">3. НСД і НСК...</a></li>
-            <li><a href="#topic4" onclick="closeSidebarAndSetActive(this)">4. Матриці та дії...</a></li>
-            <li><a href="#topic5" onclick="closeSidebarAndSetActive(this)">5. Визначники</a></li>
-            <li><a href="#topic6" onclick="closeSidebarAndSetActive(this)">6. Обчислення визначників</a></li>
-            <li><a href="#topic7" onclick="closeSidebarAndSetActive(this)">7. Обернена матриця</a></li>
-            <li><a href="#topic8" onclick="closeSidebarAndSetActive(this)">8. Конгруенції...</a></li>
-            <li><a href="#topic9" onclick="closeSidebarAndSetActive(this)">9. Класи лишків...</a></li>
-            <li><a href="#topic10" onclick="closeSidebarAndSetActive(this)">10. Теореми Ейлера і Ферма</a></li>
-            <li><a href="#topic11" onclick="closeSidebarAndSetActive(this)">11. Поле комплексних чисел</a></li>
-            <li><a href="#topic12" onclick="closeSidebarAndSetActive(this)">12. Тригонометрична форма...</a></li>
-            <li><a href="#topic13" onclick="closeSidebarAndSetActive(this)">13. Лінійні простори...</a></li>
-            <li><a href="#topic14" onclick="closeSidebarAndSetActive(this)">14. Координати і перетворення...</a></li>
-            <li><a href="#topic15" onclick="closeSidebarAndSetActive(this)">15. Евклідові й унітарні простори</a></li>
-            <li><a href="#topic16" onclick="closeSidebarAndSetActive(this)">16. Ортогональні підпростори...</a></li>
-            <li><a href="#topic17" onclick="closeSidebarAndSetActive(this)">17. Лінійні оператори...</a></li>
-            <li><a href="#topic18" onclick="closeSidebarAndSetActive(this)">18. Власні значення та вектори...</a></li>
+            <li><a href="#topic1" onclick="closeSidebarAndSetActive(this)">1. Відношення подільності, його найпростіші властивості. Теорема про ділення з остачею.</a></li>
+            <li><a href="#topic2" onclick="closeSidebarAndSetActive(this)">2. Означення і властивості простих та складених чисел. Решето Ератосфена. Канонічна форма натурального числа. Розподіл простих чисел серед чисел натурального ряду.</a></li>
+            <li><a href="#topic3" onclick="closeSidebarAndSetActive(this)">3. Найбільший спільний дільник і найменше спільне кратне та способи знаходження їх. Взаємно прості числа.</a></li>
+            <li><a href="#topic4" onclick="closeSidebarAndSetActive(this)">4. Матриці та дії над ними.</a></li>
+            <li><a href="#topic5" onclick="closeSidebarAndSetActive(this)">5. Визначники.</a></li>
+            <li><a href="#topic6" onclick="closeSidebarAndSetActive(this)">6. Обчислення визначників.</a></li>
+            <li><a href="#topic7" onclick="closeSidebarAndSetActive(this)">7. Обернена матриця.</a></li>
+            <li><a href="#topic8" onclick="closeSidebarAndSetActive(this)">8. Конгруенції в кільці цілих чисел та їхні найпростіші властивості.</a></li>
+            <li><a href="#topic9" onclick="closeSidebarAndSetActive(this)">9. Класи лишків, повна і зведена системи лишків за даним модулем.</a></li>
+            <li><a href="#topic10" onclick="closeSidebarAndSetActive(this)">10. Теореми Ейлера і Ферма.</a></li>
+            <li><a href="#topic11" onclick="closeSidebarAndSetActive(this)">11. Поле комплексних чисел.</a></li>
+            <li><a href="#topic12" onclick="closeSidebarAndSetActive(this)">12. Тригонометрична форма комплексного числа та її застосування.</a></li>
+            <li><a href="#topic13" onclick="closeSidebarAndSetActive(this)">13. Лінійні простори та підпростори. База простору.</a></li>
+            <li><a href="#topic14" onclick="closeSidebarAndSetActive(this)">14. Координати і перетворення координат у лінійних просторах. Ізоморфізм лінійних просторів.</a></li>
+            <li><a href="#topic15" onclick="closeSidebarAndSetActive(this)">15. Евклідові й унітарні простори.</a></li>
+            <li><a href="#topic16" onclick="closeSidebarAndSetActive(this)">16. Ортогональні підпростори й ортогональні доповнення.</a></li>
+            <li><a href="#topic17" onclick="closeSidebarAndSetActive(this)">17. Лінійні оператори та їхні матриці.</a></li>
+            <li><a href="#topic18" onclick="closeSidebarAndSetActive(this)">18. Власні значення та власні вектори. Оператори простої структури.</a></li>
         </ul>
     </div>
     <div class="theme-switch-wrapper">
@@ -414,180 +514,390 @@
 
 <div class="container" id="mainContainer">
     <div class="main-content">
-        <h1>Конспект з Алгебри та Геометрії</h1>
-
+<div class="title-page">
+    <h1>Конспект з Алгебри та Геометрії</h1>
+    <p class="author-note">Підготовано з підручників "Алгебра і Теорія чисел" (Завало С. Т) та "Лінійна алгебра і аналітична геометрія" (Зеліско В. Р., Зеліско Г. В.). Карточки з маркуванням "важливо" - теорія яку найвірогідніше будуть вимагати на екзамені. Карточки типу "Що таке ..." - пояснення складних тем від ШІ.</p>
+</div>
         <div class="toc">
             <h3>Зміст</h3>
             <ul>
-                <li><a href="#topic1">1. Подільність</a></li>
-                <li><a href="#topic2">2. Прості числа</a></li>
-                <li><a href="#topic3">3. НСД, НСК</a></li>
-                <li><a href="#topic4">4. Матриці</a></li>
-                <li><a href="#topic5">5. Визначники</a></li>
-                <li><a href="#topic6">6. Обч. визначників</a></li>
-                <li><a href="#topic7">7. Оберн. матриця</a></li>
-                <li><a href="#topic8">8. Конгруенції</a></li>
-                <li><a href="#topic9">9. Класи лишків</a></li>
-                <li><a href="#topic10">10. Ейлер, Ферма</a></li>
-                <li><a href="#topic11">11. Компл. числа</a></li>
-                <li><a href="#topic12">12. Триг. форма</a></li>
-                <li><a href="#topic13">13. Лін. простори</a></li>
-                <li><a href="#topic14">14. Координати</a></li>
-                <li><a href="#topic15">15. Евкл./Уніт. простори</a></li>
-                <li><a href="#topic16">16. Ортог. підпр.</a></li>
-                <li><a href="#topic17">17. Лін. оператори</a></li>
-                <li><a href="#topic18">18. Власні знач.</a></li>
+                <li><a href="#topic1">Відношення подільності, його найпростіші властивості. Теорема про ділення з остачею.</a></li>
+                <li><a href="#topic2">Означення і властивості простих та складених чисел. Решето Ератосфена.</a></li>
+                <li><a href="#topic3">Найбільший спільний дільник і найменше спільне кратне. Взаємно прості числа.</a></li>
+                <li><a href="#topic4">Матриці та дії над ними.</a></li>
+                <li><a href="#topic5">Визначники.</a></li>
+                <li><a href="#topic6">Обчислення визначників.</a></li>
+                <li><a href="#topic7">Обернена матриця.</a></li>
+                <li><a href="#topic8">Конгруенції в кільці цілих чисел та їхні найпростіші властивості.</a></li>
+                <li><a href="#topic9">Класи лишків, повна і зведена системи лишків за даним модулем.</a></li>
+                <li><a href="#topic10">Теореми Ейлера і Ферма.</a></li>
+                <li><a href="#topic11">Поле комплексних чисел.</a></li>
+                <li><a href="#topic12">Тригонометрична форма комплексного числа та її застосування.</a></li>
+                <li><a href="#topic13">Лінійні простори та підпростори. База простору.</a></li>
+                <li><a href="#topic14">Координати і перетворення координат у лінійних просторах. Ізоморфізм лінійних просторів.</a></li>
+                <li><a href="#topic15">Евклідові й унітарні простори.</a></li>
+                <li><a href="#topic16">Ортогональні підпростори й ортогональні доповнення.</a></li>
+                <li><a href="#topic17">Лінійні оператори та їхні матриці.</a></li>
+                <li><a href="#topic18">Власні значення та власні вектори. Оператори простої структури.</a></li>
             </ul>
         </div>
 
         <h2 id="topic1">1. Відношення подільності, його найпростіші властивості. Теорема про ділення з остачею.</h2>
+        <p><em>Відношення подільності є фундаментальним поняттям в теорії чисел, оскільки воно лежить в основі таких важливих концепцій, як прості числа, найбільший спільний дільник та найменше спільне кратне. Розуміння властивостей подільності дозволяє аналізувати структуру цілих чисел та розв'язувати різноманітні задачі, пов'язані з їхніми дільниками та кратними. Теорема про ділення з остачею є наріжним каменем для багатьох алгоритмів у теорії чисел, зокрема для алгоритму Евкліда знаходження НСД. Вона гарантує, що будь-яке ціле число можна "представити" через інше ненульове ціле число з деякою "поправкою" – остачею, яка завжди менша за модуль дільника.</em></p>
         <h3>Теоретичні відомості:</h3>
         <ul>
-            <li>Якщо для цілих чисел $a$ і $b$ в кільці цілих чисел $\mathbb{Z}$ існує таке ціле число $q$, що $a = bq$, то кажуть, що "$a$ <b>ділиться</b> на $b$" або "$b$ <b>ділить</b> $a$" і пишуть $a \vdots b$ або $b|a$. Число $a$ називають <b>кратним</b> числа $b$, а $b$ - <b>дільником</b> числа $a$.</li>
+            <li>Якщо для цілих чисел $a$ і $b$ в кільці цілих чисел $\mathbb{Z}$ існує таке ціле число $q$, що $a = bq$, то кажуть, що "$a$ <b>ділиться</b> на $b$" або "$b$ <b>ділить</b> $a$" і пишуть $a \vdots b$ або $b|a$. Число $a$ називають <b>кратним</b> числа $b$, а $b$ - <b>дільником</b> числа $a$. Якщо в кільці $\mathbb{Z}$ не існує числа $q$ такого, що $a=bq$, то кажуть, що «$a$ не ділиться на $b$», або «$b$ не ділить $a$» і пишуть відповідно $a \not\vdots b$, $b \nmid a$.</li>
             <li><b>Властивості подільності</b> (для довільних цілих $a, b, c, m, n$):
                 <ol>
                     <li>$a|a$.</li>
                     <li>$0 \vdots a$.</li>
                     <li>$a \vdots \pm 1$.</li>
                     <li>Якщо $a \vdots 0$, то $a=0$.</li>
-                    <li>Якщо $a|b$ і $b|c$, то $a|c$.</li>
-                    <li>Якщо $a|b$, то $ac|bc$.</li>
+                    <li>Якщо $a|b$ і $b|c$, то $a|c$ (транзитивність).</li>
+                    <li>Якщо $a|b$, то $ac|bc$ для будь-якого цілого $c$.</li>
                     <li>Якщо $c|a$ і $c|b$, то $c|(a \pm b)$.</li>
                     <li>Якщо $c|a$ і $c|(a \pm b)$, то $c|b$.</li>
-                    <li>Якщо $a|c$ і $b \nmid c$, то $(a \pm b)$ не ділиться на $c$ (зауваження: це твердження в оригіналі потребує уточнення).</li>
-                    <li>Якщо $a \vdots b$, то $ac \vdots bc$.</li>
+                    <li>Якщо $a|c$ і $b \nmid c$, то $(a \pm b)$ на $c$ (твердження потребує уточнення).</li>
+                    <li>Якщо $a \vdots b$, то $ac \vdots bc$. (повтор властивості 6)</li>
                     <li>Якщо $ac \vdots bc$ і $c \neq 0$, то $a \vdots b$.</li>
                     <li>Якщо $m|a$ і $n|b$, то $mn|ab$.</li>
-                    <li>Якщо $c|a$ і $c|b$, то $c|(ma \pm nb)$.</li>
+                    <li>Якщо $c|a$ і $c|b$, то $c|(ma + nb)$ для будь-яких цілих $m, n$.</li>
                     <li>Якщо $a|b$ і $b|a$, то $a = \pm b$.</li>
-                    <li>Якщо $a|b$ і $|b|<|a|$ ($a \neq 0$), то $b=0$.</li>
+                    <li>Якщо $a|b$ і $|b|<|a|$ (при $a \neq 0$), то $b=0$.</li>
                 </ol>
             </li>
-            <li><b>Теорема про ділення з остачею</b>: Для будь-яких цілих чисел $a$ і $b$, де $b \neq 0$, існує єдина пара цілих чисел $q$ і $r$ така, що $a = bq + r$, де $0 \le r < |b|$. Число $q$ називають <b>неповною часткою</b>, а $r$ - <b>остачею</b>.</li>
+            <li><b>Теорема про ділення з остачею</b>: Для будь-яких цілих чисел $a$ і $b$, де $b \neq 0$, існує єдина пара цілих чисел $q$ (неповна частка) і $r$ (остача) така, що $a = bq + r$, де $0 \le r < |b|$.</li>
             <li>Ціле число $a$ тоді і тільки тоді кратне цілому числу $b \neq 0$, коли остача від ділення $a$ на $b$ дорівнює нулю.</li>
         </ul>
+        <div class="important-info-box">
+            <h4>Важливо:</h4>
+            <ul>
+                <li><strong>Означення подільності:</strong> $a \vdots b \iff \exists q \in \mathbb{Z} : a = bq$.</li>
+                <li><strong>Теорема про ділення з остачею:</strong> Для $a, b \in \mathbb{Z}, b \neq 0$, існує єдина пара $q, r \in \mathbb{Z}$ така, що $a = bq + r$, $0 \le r < |b|$.</li>
+                <li><strong>Транзитивність подільності:</strong> Якщо $a|b$ і $b|c$, то $a|c$.</li>
+                <li><strong>Лінійна комбінація:</strong> Якщо $c|a$ і $c|b$, то $c|(ma + nb)$ для будь-яких $m, n \in \mathbb{Z}$.</li>
+            </ul>
+        </div>
 
         <h2 id="topic2">2. Означення і властивості простих та складених чисел. Решето Ератосфена. Канонічна форма натурального числа. Розподіл простих чисел серед чисел натурального ряду.</h2>
+        <p><em>Прості числа є "фундаментальними будівельними блоками" для всіх натуральних чисел через множення, що формалізується основною теоремою арифметики. Їх розподіл у натуральному ряді є складною та важливою задачею теорії чисел. Решето Ератосфена, хоч і є давнім методом, ілюструє алгоритмічний підхід до знаходження простих чисел. Канонічний розклад числа на прості множники є унікальним і надзвичайно корисним для аналізу його властивостей.</em></p>
         <h3>Теоретичні відомості:</h3>
         <ul>
             <li>Натуральне число $p > 1$, дільниками якого є тільки $1$ і $p$, називають <b>простим</b>.</li>
             <li>Натуральне число $a > 1$, яке має дільники, відмінні від $1$ і $a$, називають <b>складеним</b>.</li>
             <li>Число $1$ не належить ні до простих, ні до складених чисел.</li>
-            <li>Найменший натуральний дільник складеного числа $a$, відмінний від $1$, є число просте і не перевищує $\sqrt{a}$.</li>
+            <li>Найменший натуральний дільник складеного числа $a > 1$, відмінний від $1$, є числом простим і не перевищує $\sqrt{a}$.</li>
             <li><b>Теорема Евкліда</b>: Множина простих чисел нескінченна.</li>
             <li><b>Основна теорема арифметики</b>: Кожне відмінне від $1$ натуральне число можна записати у вигляді добутку простих чисел, і притому єдиним способом (якщо не брати до уваги порядок розміщення множників).</li>
-            <li><b>Решето Ератосфена</b>: Метод для знаходження всіх простих чисел, що не перевищують даного натурального числа $a$.</li>
-            <li><b>Канонічна форма натурального числа</b>: $a = p_1^{k_1} p_2^{k_2} \dots p_m^{k_m}$, де $p_i$ - різні прості числа, $k_i$ - натуральні числа.</li>
-            <li>Довільний дільник $d$ числа $a$ має вигляд: $d = p_1^{l_1} p_2^{l_2} \dots p_m^{l_m}$, де $0 \le l_i \le k_i$.</li>
-            <li>$\pi(x)$ - число простих чисел, які не перевищують $x$.</li>
-            <li><b>Асимптотичний закон розподілу простих чисел</b>: $\lim_{x \to \infty} \left( \pi(x) : \frac{x}{\ln x} \right) = 1$.</li>
+            <li><b>Решето Ератосфена</b>: Метод для знаходження всіх простих чисел, що не перевищують даного натурального числа $a$. Полягає у послідовному викреслюванні з ряду $1, 2, \dots, a$ числа $1$, потім всіх чисел, кратних $2$ (крім $2$), потім кратних $3$ (крім $3$), і т.д., для всіх простих $p_k \le \sqrt{a}$.</li>
+            <li><b>Канонічна форма натурального числа $a>1$</b>: $a = p_1^{k_1} p_2^{k_2} \dots p_m^{k_m}$, де $p_i$ - різні прості числа, $k_i$ - натуральні числа.</li>
+            <li>Довільний натуральний дільник $d$ числа $a = p_1^{k_1} \dots p_m^{k_m}$ має вигляд: $d = p_1^{l_1} \dots p_m^{l_m}$, де $0 \le l_i \le k_i$ для $i=1, \dots, m$.</li>
+            <li>$\pi(x)$ - функція, що позначає число простих чисел, які не перевищують натурального числа $x$.</li>
+            <li><b>Асимптотичний закон розподілу простих чисел</b>: $\lim_{x \to \infty} \frac{\pi(x)}{x/\ln x} = 1$.</li>
             <li><b>Нерівності Чебишова</b>: $0.92129 \cdot \frac{x}{\ln x} < \pi(x) < 1.10555 \cdot \frac{x}{\ln x}$.</li>
-            <li><b>Теорема Діріхле</b>: У кожній арифметичній прогресії $an+b$, де $(a,b)=1$, міститься нескінченна множина простих чисел.</li>
+            <li><b>Теорема Діріхле</b>: У кожній арифметичній прогресії, перший член і різниця якої є взаємно прості числа, міститься нескінченна множина простих чисел.</li>
         </ul>
+        <div class="important-info-box">
+            <h4>Важливо:</h4>
+            <ul>
+                <li><strong>Просте число $p$</strong>: натуральне число $p > 1$, має рівно два натуральних дільники: $1$ і $p$.</li>
+                <li><strong>Складене число $a$</strong>: натуральне число $a > 1$, яке має більше двох натуральних дільників.</li>
+                <li><strong>Основна теорема арифметики:</strong> $a = p_1^{k_1} p_2^{k_2} \dots p_m^{k_m}$ (розклад єдиний).</li>
+                <li><strong>Теорема Евкліда:</strong> Існує нескінченно багато простих чисел.</li>
+                <li>Для перевірки простоти числа $a$, достатньо перевірити подільність на прості числа $p \le \sqrt{a}$.</li>
+            </ul>
+        </div>
 
         <h2 id="topic3">3. Найбільший спільний дільник і найменше спільне кратне та способи знаходження їх. Взаємно прості числа.</h2>
+        <p><em>Поняття НСД та НСК є ключовими для роботи з дільниками та кратними чисел. Алгоритм Евкліда надає ефективний спосіб знаходження НСД двох чисел, а також дозволяє представити НСД у вигляді лінійної комбінації цих чисел, що має важливі теоретичні та практичні застосування (наприклад, у розв'язанні діофантових рівнянь). Взаємно прості числа, тобто числа, НСД яких дорівнює 1, відіграють особливу роль у теорії конгруенцій та криптографії.</em></p>
          <h3>Теоретичні відомості:</h3>
         <ul>
-            <li><b>Найбільший спільний дільник (НСД)</b> $(a_1, \dots, a_n)$: найбільший із спільних дільників.</li>
-            <li>Числа <b>взаємно прості</b>: $(a,b)=1$.</li>
-            <li><b>Алгоритм Евкліда</b>: для знаходження НСД$(a,b)$ послідовним діленням з остачею. $(a,b)$ - остання ненульова остача.</li>
-            <li><b>Лінійне зображення НСД</b>: $d = ax + by$.</li>
-            <li><b>Найменше спільне кратне (НСК)</b> $[a_1, \dots, a_n]$: найменше з додатних спільних кратних.</li>
-            <li>$[a,b] = \frac{|ab|}{(a,b)}$.</li>
-            <li><b>НСД і НСК через канонічний розклад</b>:
-                $a = \prod p_i^{k_i}$, $b = \prod p_i^{m_i}$.
-                $(a,b) = \prod p_i^{\min(k_i, m_i)}$.
-                $[a,b] = \prod p_i^{\max(k_i, m_i)}$.</li>
+            <li>Якщо кожне з цілих чисел $a_1, a_2, \dots, a_n$ ділиться на ціле число $d$, то число $d$ називають <b>спільним дільником</b> цих чисел.</li>
+            <li><b>Найбільший спільний дільник (НСД)</b> чисел $a_1, \dots, a_n$, позначається $(a_1, \dots, a_n)$, – це найбільший із їхніх спільних натуральних дільників. Альтернативне означення: НСД – це невід'ємний спільний дільник, який ділиться на будь-який інший їхній спільний дільник.</li>
+            <li>Якщо $(a_1, \dots, a_n) = 1$, то ці числа називають <b>взаємно простими</b>. Якщо кожне з чисел $a_1, \dots, a_n$ взаємно просте з кожним з решти, то числа називають <b>попарно взаємно простими</b>.</li>
+            <li>$(a_1, a_2, \dots, a_n) = ((a_1, a_2), a_3, \dots, a_n)$.</li>
+            <li><b>Алгоритм Евкліда</b>: для знаходження НСД$(a,b)$ ($a, b$ – натуральні):
+                $a = bq_1 + r_1, \quad 0 < r_1 < b$ <br>
+                $b = r_1q_2 + r_2, \quad 0 < r_2 < r_1$ <br>
+                ... <br>
+                $r_{k-2} = r_{k-1}q_k + r_k, \quad 0 < r_k < r_{k-1}$ <br>
+                $r_{k-1} = r_k q_{k+1} + 0$. <br>
+                Тоді НСД$(a,b) = r_k$ (остання ненульова остача).
+            </li>
+            <li><b>Лінійне зображення НСД</b>: Якщо $d = (a,b)$, то існують такі цілі числа $x$ і $y$, що $d = ax + by$.</li>
+            <li><b>Властивості НСД</b>:
+                <ul>
+                    <li>$(am, bm) = |m|(a,b)$.</li>
+                    <li>Якщо $d=(a,b)$, то $(\frac{a}{d}, \frac{b}{d})=1$.</li>
+                    <li>$(a,b)=1 \iff \exists u,v \in \mathbb{Z}: au+bv=1$.</li>
+                    <li>Якщо $(a,b)=1$ і $a|bc$, то $a|c$.</li>
+                    <li>Якщо $a|c$, $b|c$ і $(a,b)=1$, то $ab|c$.</li>
+                </ul>
+            </li>
+            <li>Ціле число $k$, яке ділиться на кожне з цілих чисел $a_1, \dots, a_n$ (де $a_i \neq 0$), називають їх <b>спільним кратним</b>.</li>
+            <li><b>Найменше спільне кратне (НСК)</b> чисел $a_1, \dots, a_n$, позначається $[a_1, \dots, a_n]$, – це найменше з їхніх додатних спільних кратних. Альтернативне означення: невід'ємне спільне кратне, на яке ділиться будь-яке інше їхнє спільне кратне.</li>
+            <li>Для натуральних $a, b$: $[a,b] \cdot (a,b) = ab$. Отже, $[a,b] = \frac{ab}{(a,b)}$.</li>
+            <li><b>НСД і НСК через канонічний розклад</b>: Нехай $a = \prod p_i^{k_i}$ і $b = \prod p_i^{m_i}$ (де $p_i$ – всі прості множники, що входять хоча б в одне з чисел, деякі $k_i$ або $m_i$ можуть бути 0).
+                Тоді $(a,b) = \prod p_i^{\min(k_1, m_1)} \dots p_s^{\min(k_s, m_s)}$.
+                $[a,b] = \prod p_i^{\max(k_1, m_1)} \dots p_s^{\max(k_s, m_s)}$.</li>
         </ul>
+        <div class="important-info-box">
+            <h4>Важливо:</h4>
+            <ul>
+                <li><strong>НСД$(a,b)$:</strong> найбільший натуральний дільник $a$ і $b$. Знаходиться за алгоритмом Евкліда.</li>
+                <li><strong>Лінійне зображення НСД:</strong> $(a,b) = d \implies \exists x, y \in \mathbb{Z}: ax + by = d$.</li>
+                <li><strong>Взаємно прості числа:</strong> $(a,b)=1 \iff ax+by=1$ для деяких $x, y \in \mathbb{Z}$.</li>
+                <li><strong>НСК$[a,b]$:</strong> найменше додатне спільне кратне $a$ і $b$.</li>
+                <li><strong>Зв'язок НСД і НСК:</strong> $[a,b] \cdot (a,b) = |ab|$.</li>
+            </ul>
+        </div>
 
 
         <h2 id="topic4">4. Матриці та дії над ними.</h2>
+        <p><em>Матриці є фундаментальним інструментом в лінійній алгебрі для представлення систем лінійних рівнянь, лінійних перетворень та інших математичних об'єктів. Розуміння операцій над матрицями, таких як додавання, множення на скаляр та добуток матриць, є ключовим для подальшого вивчення визначників, обернених матриць та розв'язання прикладних задач. Важливо пам'ятати про специфіку множення матриць (умова узгодженості розмірів та некомутативність) та властивості транспонування.</em></p>
         <h3>Теоретичні відомості:</h3>
         <ul>
-            <li><b>Матриця</b> $m \times n$: прямокутна таблиця чисел $A = (a_{ij})$.</li>
-            <li><b>Дії</b>: транспонування ($A^T$), множення на число ($\lambda A$), сума ($A+B$), добуток ($AB$). $c_{ij} = \sum_{p=1}^{k} a_{ip}b_{pj}$.</li>
-            <li><b>Властивості</b>: асоціативність множення, дистрибутивність, $(AB)^T = B^T A^T$.</li>
-            <li><b>Типи матриць</b>: нульова, діагональна ($\text{diag}(d_1, \dots, d_n)$), одинична ($E$), скалярна ($\lambda E$), симетрична ($A=A^T$), кососиметрична ($A=-A^T$), трикутна (верхня/нижня).</li>
+            <li><b>Матриця</b> розміру $m \times n$ – це впорядкована прямокутна таблиця чисел, що містить $m$ рядків і $n$ стовпців. Числа $a_{ij} \in \mathbb{R}$ (або з іншого поля), що входять до опису матриці, називаються її <b>елементами</b>. Елемент матриці, розташований в $i$-му рядку і $j$-му стовпці, позначається $a_{ij}$. Множину всіх $m \times n$-матриць з елементами з множини $\mathbb{R}$ позначають $M_{m \times n}(\mathbb{R})$, зокрема $M_n(\mathbb{R})$ – множина всіх квадратних матриць $n$-го порядку.</li>
+            <li>Матриця, всі елементи якої дорівнюють нулю, називається <b>нульовою</b> і позначається $(0)$.</li>
+            <li>Дві матриці $A=(a_{ij})$ і $B=(b_{ij})$ називаються <b>рівними</b>, якщо вони однакових розмірів і їхні відповідні компоненти рівні, тобто $a_{ij}=b_{ij}$ для всіх $i, j$.</li>
+            <li>Якщо в матриці $A=(a_{ij}) \in M_{m \times n}(\mathbb{R})$ замінити рядки на стовпці, то одержимо матрицю з $M_{n \times m}(\mathbb{R})$, яка називається <b>транспонованою матрицею</b> і позначається $A^T$.</li>
+            <li><b>Добутком матриці $A=(a_{ij})$ на число $\lambda$</b> називається матриця $B=(b_{ij})$ з елементами $b_{ij} = \lambda a_{ij}$.</li>
+            <li><b>Сумою матриць $A=(a_{ij})$ і $B=(b_{ij})$</b> однакових розмірів $m \times n$ називається матриця $C=(c_{ij}) \in M_{m \times n}(\mathbb{R})$ з елементами $c_{ij} = a_{ij} + b_{ij}$.</li>
+            <li>Нехай $A$ – матриця розміру $m \times k$, $B$ – матриця розміру $k \times n$. <b>Добутком матриці $A=(a_{ij})$ на матрицю $B=(b_{kj})$</b> називається матриця $C=(c_{ij})$ розміру $m \times n$, елементи якої визначають рівністю $c_{ij} = \sum_{p=1}^{k} a_{ip}b_{pj}$. Кількість стовпців першої матриці має дорівнювати кількості рядків другої матриці.</li>
+            <li>Для довільних матриць $A, B, C$ відповідних розмірів і для довільного числа $\lambda \in \mathbb{R}$ правильними є такі <b>властивості</b>:
+                <ol>
+                    <li>$A(BC)=(AB)C$ (асоціативність множення).</li>
+                    <li>$\lambda(AB)=(\lambda A)B = A(\lambda B)$.</li>
+                    <li>$(A+B)C=AC+BC$ (дистрибутивність справа).</li>
+                    <li>$A(B+C)=AB+AC$ (дистрибутивність зліва).</li>
+                    <li>$(AB)^T = B^T A^T$.</li>
+                </ol>
+            </li>
+            <li>Квадратна матриця $A \in M_n(\mathbb{R})$, для якої $a_{ij}=0$ для всіх $i \neq j$, називається <b>діагональною</b>. Позначають $D=\text{diag}(a_{11}, a_{22}, \dots, a_{nn})$.</li>
+            <li>Квадратна матриця $E = \text{diag}(1,1,\dots,1)$ називається <b>одиничною</b>. $AE=EA=A$.</li>
+            <li>Квадратна матриця вигляду $\lambda E = \text{diag}(\lambda, \lambda, \dots, \lambda)$ називається <b>скалярною матрицею</b>. $(\lambda E)A=A(\lambda E)=\lambda A$.</li>
+            <li>Квадратна матриця $A=(a_{ij})$, для якої $A=A^T$ (тобто $a_{ij}=a_{ji}$), називається <b>симетричною</b>.</li>
+            <li>Квадратна матриця $A=(a_{ij})$, для якої $A=-A^T$ (тобто $a_{ij}=-a_{ji}$, звідси $a_{ii}=0$), називається <b>кососиметричною</b>.</li>
+            <li>Матриця, в якої $a_{ij}=0$ при $i > j$, називається <b>верхньою трикутною матрицею</b>.</li>
+            <li>Матриця, в якої $a_{ij}=0$ при $i < j$, називається <b>нижньою трикутною матрицею</b>.</li>
         </ul>
+        <div class="important-info-box">
+            <h4>Важливо:</h4>
+            <ul>
+                <li><strong>Множення матриць $C=AB$ ($A_{m \times k}, B_{k \times n}$):</strong> $c_{ij} = \sum_{p=1}^{k} a_{ip}b_{pj}$. Множення можливе, якщо кількість стовпців $A$ дорівнює кількості рядків $B$. Загалом, $AB \neq BA$.</li>
+                <li><strong>Транспонована матриця $A^T$:</strong> рядки стають стовпцями, і навпаки. $(AB)^T = B^T A^T$.</li>
+                <li><strong>Одинична матриця $E$:</strong> діагональна матриця з одиницями на головній діагоналі; $AE=EA=A$.</li>
+                <li><strong>Симетрична матриця:</strong> $A=A^T$.</li>
+                <li><strong>Кососиметрична матриця:</strong> $A=-A^T$ (діагональні елементи нульові).</li>
+            </ul>
+        </div>
 
         <h2 id="topic5">5. Визначники.</h2>
+        <p><em>Визначник (детермінант) – це число, яке ставиться у відповідність квадратній матриці і має важливі властивості та застосування, зокрема, для розв'язання систем лінійних рівнянь (метод Крамера), знаходження оберненої матриці, визначення лінійної незалежності векторів-стовпців (або рядків) матриці. Обчислення визначників вищих порядків базується на понятті інверсії в перестановках індексів.</em></p>
+        <div class="explanation-box">
+            <h5>Що таке "інверсія у перестановці"?</h5>
+            <p>Уявіть, що у вас є впорядкований набір чисел, наприклад (1, 2, 3). Перестановка – це будь-який інший порядок цих чисел, наприклад (3, 1, 2). Інверсія – це пара чисел у перестановці, де більше число стоїть лівіше меншого. У (3, 1, 2):
+                <ul><li>(3,1) – інверсія (3 > 1)</li><li>(3,2) – інверсія (3 > 2)</li><li>(1,2) – не інверсія</li></ul>
+            Кількість інверсій допомагає визначити "знак" добутку елементів у формулі визначника.
+            </p>
+        </div>
         <h3>Теоретичні відомості:</h3>
         <ul>
-            <li><b>Визначник 2-го порядку</b>: $|A| = a_{11}a_{22} - a_{12}a_{21}$.</li>
-            <li><b>Визначник 3-го порядку</b>: правило Саррюса (трикутників).</li>
-            <li><b>Визначник $n$-го порядку</b>: $\det A = \sum (-1)^t a_{1j_1}a_{2j_2}\dots a_{nj_n}$, $t$ - число інверсій.</li>
-            <li><b>Властивості</b>: $\det(A^T) = \det A$; $\det A = 0$ якщо є нульовий рядок/стовпець або пропорційні рядки/стовпці; знак змінюється при перестановці рядків/стовпців; винесення множника; не змінюється при додаванні до рядка/стовпця іншого, помноженого на число; $\det(AB) = \det A \cdot \det B$.</li>
-            <li><b>Формули Крамера</b>: для $A\vec{x} = \vec{b}$ з $\Delta = \det A \neq 0$, $x_j = \frac{\Delta_j}{\Delta}$.</li>
+            <li><b>Визначником матриці $A=\begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{pmatrix}$ другого порядку</b> називається число $|A| = a_{11}a_{22} - a_{12}a_{21}$.</li>
+            <li><b>Визначником матриці третього порядку</b> називається число $|A| = a_{11}a_{22}a_{33} + a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32} - a_{13}a_{22}a_{31} - a_{12}a_{21}a_{33} - a_{11}a_{23}a_{32}$ (правило трикутників або Саррюса).</li>
+            <li><b>Перестановка</b> елементів множини $M=\{1,2,\dots,n\}$ – це їхнє розміщення в певному порядку $(i_1, i_2, \dots, i_n)$.</li>
+            <li>Два числа $i_m$ та $i_k$ в перестановці утворюють <b>інверсію</b>, якщо більше з них стоїть перед меншим ($i_m > i_k$ при $m < k$).</li>
+            <li>Перестановка називається <b>парною (непарною)</b>, якщо кількість інверсій, які утворюють її елементи, є парною (непарною).</li>
+            <li><b>Визначником квадратної матриці $A=(a_{ij})$ $n$-го порядку</b> називається число $\det A = \sum_{(j_1, \dots, j_n)} (-1)^t a_{1j_1}a_{2j_2}\dots a_{nj_n}$, де сума береться по всіх $n!$ перестановках $(j_1, \dots, j_n)$ чисел $1, \dots, n$, а $t$ – кількість інверсій у перестановці $(j_1, \dots, j_n)$ других індексів (за умови, що перші індекси елементів добутку впорядковані за зростанням).</li>
+            <li><b>Властивості визначників</b>:
+                <ol>
+                    <li>$\det(A^T) = \det A$.</li>
+                    <li>Якщо матриця $A$ має нульовий рядок (або стовпець), то $\det A = 0$.</li>
+                    <li>У разі перестановки двох рядків (стовпців) визначник змінює знак, не змінюючи абсолютної величини.</li>
+                    <li>Якщо матриця $A$ має два однакові рядки (стовпці), то $\det A = 0$.</li>
+                    <li>Якщо всі елементи одного з рядків (стовпців) визначника помножити на число $\lambda$, то і визначник помножиться на $\lambda$.</li>
+                    <li>Якщо два рядки (стовпці) матриці $A$ пропорційні, то $\det A = 0$.</li>
+                    <li>Якщо один з рядків (стовпців) визначника є лінійною комбінацією інших його рядків (стовпців), то цей визначник дорівнює нулю.</li>
+                    <li>Якщо до елементів одного з рядків (стовпців) визначника додати відповідні елементи іншого рядка (стовпця), помножені на число $\lambda$, то визначник не зміниться.</li>
+                    <li>$\det(AB) = \det A \cdot \det B$.</li>
+                </ol>
+            </li>
+            <li><b>Формули Крамера</b>: Для системи $n$ лінійних рівнянь з $n$ невідомими $A\vec{x} = \vec{b}$, якщо визначник системи $\Delta = \det A \neq 0$, то така система є визначеною і розв'язок цієї системи знаходять за формулами $x_j = \frac{\Delta_j}{\Delta}$, де $j=1,2,\dots,n$, а $\Delta_j$ – визначник, який отримують з визначника $\Delta$ заміною $j$-го стовпчика на стовпець вільних членів.</li>
         </ul>
+        <div class="important-info-box">
+            <h4>Важливо:</h4>
+            <ul>
+                <li><strong>Визначник $n$-го порядку:</strong> $\det A = \sum (-1)^t a_{1j_1}a_{2j_2}\dots a_{nj_n}$.</li>
+                <li><strong>$\det(A^T) = \det A$</strong>.</li>
+                <li><strong>Властивість 8 (основна для обчислень):</strong> Визначник не змінюється при додаванні до рядка/стовпця іншого рядка/стовпця, помноженого на число.</li>
+                <li><strong>$\det(AB) = \det A \cdot \det B$</strong>.</li>
+                <li><strong>Формули Крамера:</strong> $x_j = \frac{\Delta_j}{\Delta}$, якщо $\Delta = \det A \neq 0$.</li>
+            </ul>
+        </div>
 
         <h2 id="topic6">6. Обчислення визначників.</h2>
+        <p><em>Обчислення визначників високих порядків за означенням є трудомістким. Тому використовуються спеціальні методи, такі як розклад за елементами рядка чи стовпця (теорема Лапласа) або зведення матриці до трикутного вигляду за допомогою елементарних перетворень, які не змінюють значення визначника (або змінюють його передбачуваним чином). Теорема Лапласа особливо ефективна, якщо рядок або стовпець містить багато нулів.</em></p>
+        <div class="explanation-box">
+            <h5>Що таке "алгебричне доповнення" і "теорема Лапласа" простими словами?</h5>
+            <p><strong>Мінор</strong> елемента – це визначник "меншої" матриці, що залишається, якщо "викреслити" рядок і стовпець, де стоїть цей елемент. <strong>Алгебричне доповнення</strong> – це той самий мінор, але зі знаком "+" або "-", який залежить від позиції елемента (як на шахівниці). <strong>Теорема Лапласа</strong> каже, що для обчислення "великого" визначника можна обрати будь-який рядок (чи стовпець), помножити кожен його елемент на його "підписаний" мінор (алгебричне доповнення) і все це додати. Це дозволяє звести обчислення визначника $n$-го порядку до обчислення кількох визначників $(n-1)$-го порядку.</p>
+        </div>
         <h3>Теоретичні відомості:</h3>
         <ul>
-            <li><b>Мінор</b> $M_{ij}$ елемента $a_{ij}$: визначник матриці, отриманої викреслюванням $i$-го рядка та $j$-го стовпця.</li>
-            <li><b>Алгебричне доповнення</b> $A_{ij} = (-1)^{i+j}M_{ij}$.</li>
-            <li><b>Розклад за рядком/стовпцем (Теорема Лапласа)</b>: $\det A = \sum_{k=1}^{n} a_{ik}A_{ik}$ (за $i$-м рядком).</li>
-            <li>Визначник трикутної матриці - добуток діагональних елементів.</li>
-            <li><b>Метод зведення до трикутного вигляду</b>.</li>
-            <li><b>Визначник Вандермонда</b>: $\Delta_n = \prod_{1 \le j < i \le n} (x_i - x_j)$.</li>
+            <li><b>Мінором $M_{ij}$</b> елемента $a_{ij}$ матриці $A$ називається визначник матриці $(n-1)$-го порядку, яку отримують з матриці $A$ викреслюванням $i$-го рядка та $j$-го стовпця.</li>
+            <li><b>Алгебричним доповненням</b> елемента $a_{ij}$ називається число $A_{ij} = (-1)^{i+j}M_{ij}$.</li>
+            <li><b>Теорема Лапласа (розклад визначника)</b>:
+                <ul>
+                    <li>За елементами $i$-го рядка: $\det A = a_{i1}A_{i1} + a_{i2}A_{i2} + \dots + a_{in}A_{in}$.</li>
+                    <li>За елементами $j$-го стовпця: $\det A = a_{1j}A_{1j} + a_{2j}A_{2j} + \dots + a_{nj}A_{nj}$.</li>
+                </ul>
+            </li>
+            <li>Визначник <b>трикутної матриці</b> (верхньої чи нижньої) дорівнює добутку діагональних елементів.</li>
+            <li><b>Метод обчислення визначників шляхом зведення матриці до трикутного вигляду</b>: Використовуючи елементарні перетворення рядків (або стовпців), які не змінюють визначник (або змінюють його знак відомим чином, або множать на відоме число), звести матрицю до трикутного вигляду. Тоді визначник дорівнює добутку діагональних елементів отриманої трикутної матриці (з урахуванням можливих змін знаку чи множників).</li>
+            <li><b>Визначник Вандермонда</b>: Для чисел $x_1, x_2, \dots, x_n$:
+            $$ \Delta_n = \begin{vmatrix} 1 & 1 & \dots & 1 \\ x_1 & x_2 & \dots & x_n \\ x_1^2 & x_2^2 & \dots & x_n^2 \\ \vdots & \vdots & \ddots & \vdots \\ x_1^{n-1} & x_2^{n-1} & \dots & x_n^{n-1} \end{vmatrix} = \prod_{1 \le j < i \le n} (x_i - x_j) $$
+            </li>
         </ul>
+        <div class="important-info-box">
+            <h4>Важливо:</h4>
+            <ul>
+                <li><strong>Мінор $M_{ij}$</strong>: визначник після викреслювання $i$-го рядка, $j$-го стовпця.</li>
+                <li><strong>Алгебричне доповнення $A_{ij}$:</strong> $(-1)^{i+j}M_{ij}$.</li>
+                <li><strong>Розклад за $i$-м рядком (Теорема Лапласа):</strong> $\det A = \sum_{k=1}^{n} a_{ik}A_{ik}$.</li>
+                <li><strong>Визначник трикутної матриці:</strong> добуток діагональних елементів.</li>
+            </ul>
+        </div>
 
         <h2 id="topic7">7. Обернена матриця.</h2>
+        <p><em>Обернена матриця є аналогом операції ділення для матриць. Вона існує лише для невироджених квадратних матриць (визначник яких не дорівнює нулю) і дозволяє розв'язувати системи лінійних рівнянь та матричні рівняння. Знаходження оберненої матриці може здійснюватися як за допомогою формули через алгебричні доповнення, так і за допомогою методу елементарних перетворень (Гаусса-Жордана).</em></p>
         <h3>Теоретичні відомості:</h3>
         <ul>
-            <li>$A^{-1}$ - <b>обернена</b> до $A$, якщо $A A^{-1} = A^{-1} A = E$.</li>
-            <li>Існує $\iff \det A \neq 0$ ($A$ - невироджена).</li>
-            <li><b>Формула</b>: $A^{-1} = \frac{1}{\det A} (A_{ij})^T$, де $(A_{ij})^T$ - союзна матриця.</li>
-            <li><b>Метод Гаусса-Жордана</b>: $(A|E) \to (E|A^{-1})$ елементарними перетвореннями рядків.</li>
-            <li><b>Властивості</b>: $(AB)^{-1} = B^{-1}A^{-1}$; $(A^T)^{-1} = (A^{-1})^T$.</li>
-            <li><b>Матричні рівняння</b>: $AX=B \implies X=A^{-1}B$; $XA=B \implies X=BA^{-1}$.</li>
+            <li>Матриця $A^{-1}$ $n$-го порядку називається <b>оберненою</b> до квадратної матриці $A$ $n$-го порядку, якщо $A A^{-1} = A^{-1} A = E$, де $E$ – одинична матриця.</li>
+            <li>Матриця, визначник якої дорівнює нулю, називається <b>виродженою</b>; матриця, визначник якої не дорівнює нулю, називається <b>невиродженою</b>.</li>
+            <li>Матриця $A$ має обернену тоді і тільки тоді, коли вона є невиродженою (тобто $\det A \neq 0$).</li>
+            <li>Обернену матрицю шукають за <b>формулою</b>:
+                $$ A^{-1} = \frac{1}{\det A} (A_{ij})^T $$
+                де $(A_{ij})^T$ – транспонована матриця алгебричних доповнень (союзна матриця).
+            </li>
+            <li>Існує <b>метод обчислення оберненої матриці за допомогою елементарних перетворень</b>: $(A|E) \sim (E|A^{-1})$.</li>
+            <li>Для довільних невироджених матриць $A, B$ та довільного ненульового числа $\lambda$ правильні такі <b>рівності</b>:
+                <ol>
+                    <li>$(AB)^{-1} = B^{-1}A^{-1}$.</li>
+                    <li>$(A^n)^{-1} = (A^{-1})^n$.</li>
+                    <li>$(\lambda A)^{-1} = \frac{1}{\lambda}A^{-1}$.</li>
+                    <li>$(A^T)^{-1} = (A^{-1})^T$.</li>
+                </ol>
+            </li>
+            <li><b>Матричні рівняння</b>: $AX=B \implies X=A^{-1}B$; $XA=B \implies X=BA^{-1}$; $AXB=C \implies X=A^{-1}CB^{-1}$.</li>
+            <li>Розв'язування систем лінійних рівнянь $A\vec{x}=\vec{b}$: $\vec{x}=A^{-1}\vec{b}$.</li>
         </ul>
+        <div class="important-info-box">
+            <h4>Важливо:</h4>
+            <ul>
+                <li><strong>Обернена матриця $A^{-1}$ існує $\iff \det A \neq 0$</strong>.</li>
+                <li><strong>Формула:</strong> $A^{-1} = \frac{1}{\det A} (A_{ij})^T$. $(A_{ij})^T$ - союзна матриця (транспонована матриця алгебричних доповнень).</li>
+                <li><strong>Метод Гаусса-Жордана:</strong> $(A|E) \xrightarrow{\text{елем. перетв. рядків}} (E|A^{-1})$.</li>
+                <li><strong>Розв'язок $AX=B$:</strong> $X=A^{-1}B$.</li>
+                <li><strong>$(AB)^{-1} = B^{-1}A^{-1}$</strong>.</li>
+            </ul>
+        </div>
 
         <h2 id="topic8">8. Конгруенції в кільці цілих чисел та їхні найпростіші властивості.</h2>
+        <p><em>Поняття конгруенції, введене Гауссом, є потужним інструментом для дослідження властивостей подільності цілих чисел. Воно дозволяє замінювати числа їхніми остачами при діленні на фіксоване число (модуль), що значно спрощує багато арифметичних обчислень та доведень. Властивості конгруенцій аналогічні властивостям рівностей, але з урахуванням модуля.</em></p>
         <h3>Теоретичні відомості:</h3>
         <ul>
-            <li>$a \equiv b \pmod{m} \iff m|(a-b)$.</li>
-            <li><b>Властивості</b>: рефлексивність, симетричність, транзитивність.
-                Якщо $a \equiv b \pmod m$ і $c \equiv d \pmod m$:
-                $a \pm c \equiv b \pm d \pmod m$.
-                $ac \equiv bd \pmod m$.
-                $a^k \equiv b^k \pmod m$ для $k \in \mathbb{N}$.
-                $f(a) \equiv f(b) \pmod m$ для многочлена $f(x)$ з цілими коефіцієнтами.
+            <li><b>Означення конгруентності</b>: Цілі числа $a$ і $b$ називають <b>конгруентними за модулем $m$</b>, якщо їхня різниця $(a-b)$ ділиться на $m$. Позначається: $a \equiv b \pmod m$.</li>
+            <li>Альтернативні означення: $a \equiv b \pmod m \iff a$ і $b$ дають однакові остачі при діленні на $m \iff \exists k \in \mathbb{Z} : a = b + mk$.</li>
+            <li><b>Основні властивості конгруенцій:</b>
+                <ol>
+                    <li>Відношення конгруентності є <b>відношенням еквівалентності</b> (рефлексивність, симетричність, транзитивність).</li>
+                    <li>Конгруенції за одним модулем можна <b>почленно додавати, віднімати і множити</b>.</li>
+                    <li>До обох частин конгруенції можна <b>додати (відняти) будь-яке ціле число</b>.</li>
+                    <li>До будь-якої частини конгруенції можна <b>додати (відняти) довільне ціле число, кратне модулю</b>.</li>
+                    <li>Обидві частини конгруенції можна <b>помножити на те саме ціле число</b>.</li>
+                    <li>Обидві частини конгруенції можна <b>поділити на їхній спільний дільник $k$</b>, якщо $k$ взаємно простий з модулем $m$.</li>
+                    <li>Якщо у многочлені $f(x)$ з цілими коефіцієнтами $a \equiv b \pmod m$, то $f(a) \equiv f(b) \pmod m$.</li>
+                    <li>Обидві частини конгруенції та модуль можна <b>помножити на те саме ціле число $k$</b>: якщо $a \equiv b \pmod m$, то $ak \equiv bk \pmod{mk}$.</li>
+                    <li>Обидві частини конгруенції та модуль можна <b>скоротити на їхній спільний дільник</b> $k > 0$.</li>
+                    <li>Якщо конгруенція має місце за кількома модулями, то вона має місце і за модулем, який дорівнює <b>НСК цих модулів</b>.</li>
+                    <li>Якщо конгруенція має місце за модулем $m$, то вона має місце за модулем $d$, де $d$ – довільний <b>дільник числа $m$</b>.</li>
+                    <li>Якщо одна частина конгруенції і модуль діляться на деяке число, то й інша частина конгруенції ділиться на те саме число.</li>
+                    <li>Якщо $a \equiv b \pmod m$, то НСД$(a,m) = $ НСД$(b,m)$.</li>
+                </ol>
             </li>
-            <li>Якщо $ac \equiv bc \pmod m$ і $d = (c,m)$, то $a \equiv b \pmod{m/d}$.</li>
         </ul>
+        <div class="important-info-box">
+            <h4>Важливо:</h4>
+            <ul>
+                <li><strong>Означення конгруентності:</strong> $a \equiv b \pmod m \iff m | (a-b)$.</li>
+                <li><strong>Властивість еквівалентності:</strong> Рефлексивність ($a \equiv a$), симетричність ($a \equiv b \Rightarrow b \equiv a$), транзитивність ($a \equiv b, b \equiv c \Rightarrow a \equiv c$).</li>
+                <li><strong>Арифметичні операції:</strong> Якщо $a \equiv b \pmod m$ і $c \equiv d \pmod m$, то $a \pm c \equiv b \pm d \pmod m$ та $ac \equiv bd \pmod m$.</li>
+                <li><strong>Ділення:</strong> Якщо $ak \equiv bk \pmod m$ і НСД$(k,m)=d$, то $a \equiv b \pmod{m/d}$.</li>
+            </ul>
+        </div>
 
         <h2 id="topic9">9. Класи лишків, повна і зведена системи лишків за даним модулем.</h2>
+        <p><em>Відношення конгруентності розбиває множину цілих чисел на класи, які називаються класами лишків. Ці класи утворюють скінченне кільце $\mathbb{Z}_m$, яке є полем, якщо модуль $m$ – просте число. Поняття повної та зведеної систем лишків є важливими для розуміння структури $\mathbb{Z}_m$ та доведення теорем Ейлера і Ферма. Зведена система лишків утворює мультиплікативну групу, властивості якої використовуються в криптографії.</em></p>
         <h3>Теоретичні відомості:</h3>
         <ul>
-            <li><b>Клас лишків</b> $\bar{a} = \{x \in \mathbb{Z} \mid x \equiv a \pmod m\}$.</li>
-            <li>Множина класів лишків $\mathbb{Z}_m = \{\bar{0}, \bar{1}, \dots, \overline{m-1}\}$ утворює кільце.</li>
-            <li>$\mathbb{Z}_m$ є полем $\iff m$ - просте число.</li>
-            <li><b>Повна система лишків</b>: набір з $m$ цілих чисел, по одному з кожного класу.</li>
-            <li><b>Зведена система лишків</b>: набір з $\varphi(m)$ цілих чисел, взаємно простих з $m$, по одному з кожного відповідного класу.</li>
-            <li>Множина класів лишків, взаємно простих з $m$, утворює мультиплікативну групу порядку $\varphi(m)$.</li>
+            <li>Відношення конгруентності за модулем $m$ розбиває $\mathbb{Z}$ на $m$ <b>класів лишків</b> $K_a^{(m)}$ (або $\bar{a}$).</li>
+            <li>Множина класів лишків $\mathbb{Z}_m = \{\bar{0}, \dots, \overline{m-1}\}$ утворює <b>комутативне кільце з одиницею</b>.</li>
+            <li>$\mathbb{Z}_m$ є <b>полем</b> $\iff m$ – просте число. Якщо $m$ – складене, в $\mathbb{Z}_m$ є <b>дільники нуля</b>.</li>
+            <li><b>Повна система лишків</b>: $m$ чисел, по одному з кожного класу.</li>
+            <li><b>Зведена система лишків</b>: $\varphi(m)$ чисел, по одному з кожного класу $K_a^{(m)}$ такого, що НСД$(a,m)=1$.</li>
+            <li>Класи лишків, взаємно прості з $m$, утворюють <b>мультиплікативну групу</b> порядку $\varphi(m)$.</li>
         </ul>
+        <div class="important-info-box">
+            <h4>Важливо:</h4>
+            <ul>
+                <li><strong>Кільце класів лишків $\mathbb{Z}_m$:</strong> множина $\{\bar{0}, \dots, \overline{m-1}\}$ з операціями $\bar{a} + \bar{b} = \overline{a+b}$ та $\bar{a} \cdot \bar{b} = \overline{ab}$.</li>
+                <li><strong>$\mathbb{Z}_m$ є полем $\iff m$ – просте число</strong>.</li>
+                <li><strong>Повна система лишків:</strong> $m$ чисел, по одному з кожного класу $K_a^{(m)}$.</li>
+                <li><strong>Зведена система лишків:</strong> $\varphi(m)$ чисел, по одному з кожного класу $K_a^{(m)}$ такого, що НСД$(a,m)=1$.</li>
+            </ul>
+        </div>
 
         <h2 id="topic10">10. Теореми Ейлера і Ферма.</h2>
+        <p><em>Теореми Ейлера та Ферма є фундаментальними результатами в теорії чисел, що встановлюють зв'язок між числом, його степенем та модулем. Теорема Ейлера узагальнює малу теорему Ферма на випадок довільного модуля (не обов'язково простого). Ці теореми мають численні застосування, зокрема, в криптографії (наприклад, RSA), для спрощення обчислень з конгруенціями та доведення подільності.</em></p>
         <h3>Теоретичні відомості:</h3>
         <ul>
-            <li><b>Теорема Ейлера</b>: Якщо $(a,m)=1$, то $a^{\varphi(m)} \equiv 1 \pmod m$.</li>
-            <li><b>Мала теорема Ферма</b>: Якщо $p$ - просте і $p \nmid a$, то $a^{p-1} \equiv 1 \pmod p$.
-            Наслідок: $a^p \equiv a \pmod p$ для будь-якого цілого $a$.</li>
+            <li><b>Теорема Ейлера:</b> Якщо НСД$(a,m)=1$, то $a^{\varphi(m)} \equiv 1 \pmod m$.</li>
+            <li><b>Мала теорема Ферма:</b> Якщо $p$ – просте і $p \nmid a$, то $a^{p-1} \equiv 1 \pmod p$.</li>
+            <li><b>Наслідок з малої теореми Ферма:</b> Якщо $p$ – просте, то $a^p \equiv a \pmod p$ для будь-якого $a \in \mathbb{Z}$.</li>
         </ul>
+        <div class="important-info-box">
+            <h4>Важливо:</h4>
+            <ul>
+                <li><strong>Теорема Ейлера:</strong> Якщо НСД$(a,m)=1$, то $a^{\varphi(m)} \equiv 1 \pmod m$. ($\varphi(m)$ - кількість натуральних чисел, менших $m$ і взаємно простих з $m$).</li>
+                <li><strong>Мала теорема Ферма:</strong> Якщо $p$ – просте, $p \nmid a$, то $a^{p-1} \equiv 1 \pmod p$.</li>
+                <li><strong>Наслідок теореми Ферма:</strong> Якщо $p$ – просте, то $a^p \equiv a \pmod p$ для будь-якого $a \in \mathbb{Z}$.</li>
+            </ul>
+        </div>
 
         <h2 id="topic11">11. Поле комплексних чисел.</h2>
+        <p><em>Комплексні числа розширюють поняття дійсних чисел, вводячи уявну одиницю $i$ ($i^2 = -1$). Це дозволяє знаходити корені з від'ємних чисел та розв'язувати будь-які квадратні (і, загалом, алгебраїчні) рівняння. Комплексні числа мають зручне геометричне представлення на комплексній площині та широко застосовуються в різних галузях математики, фізики та інженерії.</em></p>
         <h3>Теоретичні відомості:</h3>
         <ul>
-            <li><b>Алгебраїчна форма</b>: $z = a+bi$, $a,b \in \mathbb{R}$, $i^2 = -1$.</li>
-            <li>$\text{Re } z = a$, $\text{Im } z = b$.</li>
-            <li><b>Дії</b>: як з многочленами, враховуючи $i^2=-1$.</li>
+            <li><b>Алгебраїчна форма</b>: $z = a+bi$, $a,b \in \mathbb{R}$, $i^2 = -1$. $\text{Re } z = a$, $\text{Im } z = b$.</li>
+            <li>Дії виконуються як з многочленами, враховуючи $i^2=-1$.</li>
             <li><b>Спряжене</b>: $\bar{z} = a-bi$. Властивості: $\overline{z_1 \pm z_2} = \bar{z_1} \pm \bar{z_2}$, $\overline{z_1 z_2} = \bar{z_1} \bar{z_2}$, $z\bar{z} = |z|^2$.</li>
             <li><b>Ділення</b>: $\frac{z_1}{z_2} = \frac{z_1 \bar{z_2}}{|z_2|^2}$.</li>
             <li><b>Модуль</b>: $|z| = \sqrt{a^2+b^2}$.</li>
-            <li><b>Аргумент</b> $\varphi = \arg z$: кут, що $\cos\varphi = a/|z|$, $\sin\varphi = b/|z|$.</li>
+            <li><b>Аргумент $\varphi = \arg z$</b>: кут, такий що $\cos\varphi = a/|z|$, $\sin\varphi = b/|z|$.</li>
+            <li><b>Квадратний корінь з $a+bi$</b>: $\sqrt{a+bi} = u+vi$, де $u = \pm\sqrt{\frac{\sqrt{a^2+b^2}+a}{2}}$, $v = \pm\sqrt{\frac{\sqrt{a^2+b^2}-a}{2}}$. Знаки $u, v$ обираються так, щоб знак добутку $uv$ збігався зі знаком $b$.</li>
         </ul>
+        <div class="important-info-box">
+            <h4>Важливо:</h4>
+            <ul>
+                <li><strong>Алгебраїчна форма:</strong> $z = a+bi$, $i^2 = -1$.</li>
+                <li><strong>Спряжене число:</strong> $\bar{z} = a-bi$.</li>
+                <li><strong>Модуль:</strong> $|z| = \sqrt{a^2+b^2}$.</li>
+                <li><strong>Множення:</strong> $(a+bi)(c+di) = (ac-bd) + (ad+bc)i$.</li>
+                <li><strong>Ділення:</strong> $\frac{z_1}{z_2} = \frac{z_1 \bar{z_2}}{|z_2|^2}$.</li>
+            </ul>
+        </div>
 
         <h2 id="topic12">12. Тригонометрична форма комплексного числа та її застосування.</h2>
+        <p><em>Тригонометрична форма комплексного числа є особливо зручною для виконання операцій множення, ділення, піднесення до степеня та добування коренів. Вона пов'язує алгебраїчне представлення з геометричним через модуль та аргумент, що спрощує розуміння цих операцій як перетворень на комплексній площині (розтяги/стиски та повороти).</em></p>
         <h3>Теоретичні відомості:</h3>
         <ul>
             <li><b>Тригонометрична форма</b>: $z = r(\cos\varphi + i\sin\varphi)$, $r=|z|$.</li>
@@ -595,12 +905,29 @@
             <li><b>Ділення</b>: $\frac{z_1}{z_2} = \frac{r_1}{r_2}(\cos(\varphi_1-\varphi_2) + i\sin(\varphi_1-\varphi_2))$.</li>
             <li><b>Формула Муавра</b>: $z^n = r^n(\cos(n\varphi) + i\sin(n\varphi))$.</li>
             <li><b>Корінь $n$-го степеня</b>: $\omega_k = \sqrt[n]{r} \left( \cos\frac{\varphi+2\pi k}{n} + i\sin\frac{\varphi+2\pi k}{n} \right)$, $k = 0, \dots, n-1$.</li>
+            <li><b>Корені $n$-го степеня з одиниці</b>: $\varepsilon_k = \cos\frac{2\pi k}{n} + i\sin\frac{2\pi k}{n}$.</li>
+            <li><b>Первісний корінь $n$-го степеня з одиниці</b>: $\varepsilon_k$, такий що НСД$(k,n)=1$.</li>
         </ul>
+        <div class="important-info-box">
+            <h4>Важливо:</h4>
+            <ul>
+                <li><strong>Тригонометрична форма:</strong> $z = r(\cos\varphi + i\sin\varphi)$.</li>
+                <li><strong>Формула Муавра:</strong> $z^n = r^n(\cos(n\varphi) + i\sin(n\varphi))$.</li>
+                <li><strong>Корінь $n$-го степеня:</strong> $\omega_k = \sqrt[n]{r} \left( \cos\frac{\varphi+2\pi k}{n} + i\sin\frac{\varphi+2\pi k}{n} \right)$, $k=0, \dots, n-1$.</li>
+                <li>При множенні модулі перемножуються, аргументи додаються.</li>
+                <li>При діленні модулі діляться, аргументи віднімаються.</li>
+            </ul>
+        </div>
 
         <h2 id="topic13">13. Лінійні простори та підпростори. База простору.</h2>
+        <p><em>Лінійний (або векторний) простір є однією з центральних структур в лінійній алгебрі. Він узагальнює поняття векторів на площині та у просторі, дозволяючи працювати з різноманітними математичними об'єктами (такими як многочлени, функції, матриці) як з векторами. Ключовими поняттями є лінійна незалежність, система твірних, база та розмірність, які характеризують структуру простору.</em></p>
+        <div class="explanation-box">
+            <h5>Що таке "база" і "розмірність" лінійного простору?</h5>
+            <p>Уявіть, що ви хочете описати будь-яку точку на площині. Вам достатньо двох напрямків (наприклад, осі X та Y) і двох чисел (координат), щоб однозначно вказати точку. Ці два напрямки (вектори вздовж осей) утворюють <strong>базу</strong>, а кількість цих напрямків (два) – це <strong>розмірність</strong> площини. Аналогічно, база лінійного простору – це мінімальний набір "незалежних напрямків" (базисних векторів), через які можна виразити будь-який інший вектор цього простору. Розмірність – це кількість таких "напрямків".</p>
+        </div>
         <h3>Теоретичні відомості:</h3>
         <ul>
-            <li><b>Лінійний простір $L$ над полем $P$</b>: множина з операціями "+" та "$\cdot$" (на скаляр), що задовольняє 8 аксіом (абелева група за "+", дистрибутивності, асоціативність скалярного множення, $1 \cdot a = a$).</li>
+            <li><b>Лінійний простір $L$ над полем $P$</b>: множина з операціями "+" та "$\cdot$" (на скаляр), що задовольняє 8 аксіом.</li>
             <li><b>Лінійна комбінація</b>: $\sum \lambda_i a_i$.</li>
             <li><b>Лінійна залежність/незалежність</b>.</li>
             <li><b>Лінійний підпростір</b> $M \subseteq L$: замкнений відносно "+" та "$\cdot$".</li>
@@ -608,8 +935,19 @@
             <li><b>База</b>: максимальна лінійно незалежна система; або мінімальна система твірних.</li>
             <li><b>Розмірність</b> $\dim L$: кількість векторів у базі.</li>
         </ul>
+        <div class="important-info-box">
+            <h4>Важливо:</h4>
+            <ul>
+                <li><strong>Лінійний простір:</strong> Множина елементів (векторів) з визначеними операціями додавання та множення на скаляр, що задовольняють 8 аксіом (абелева група за додаванням, дистрибутивності, асоціативність скалярного множення, $1 \cdot a = a$).</li>
+                <li><strong>Лінійна незалежність системи векторів $\{a_i\}$:</strong> Рівність $\sum \lambda_i a_i = 0_L$ можлива тільки якщо всі $\lambda_i = 0$.</li>
+                <li><strong>База лінійного простору:</strong> Будь-яка впорядкована максимальна лінійно незалежна система векторів цього простору (або мінімальна система твірних).</li>
+                <li><strong>Розмірність $\dim L$:</strong> Кількість векторів у будь-якій базі простору $L$.</li>
+                <li><strong>Критерій підпростору:</strong> Непорожня підмножина $M \subseteq L$ є підпростором, якщо для $\forall a,b \in M, \forall \alpha \in P \implies a+b \in M \text{ та } \alpha a \in M$.</li>
+            </ul>
+        </div>
 
         <h2 id="topic14">14. Координати і перетворення координат у лінійних просторах. Ізоморфізм лінійних просторів.</h2>
+        <p><em>Задання бази в лінійному просторі дозволяє однозначно представити кожен вектор цього простору набором чисел – його координатами. Це дає можливість зводити операції з абстрактними векторами до операцій з їхніми координатними стовпцями та матрицями. Матриця переходу описує, як змінюються координати вектора при зміні бази. Поняття ізоморфізму встановлює еквівалентність між лінійними просторами однакової розмірності, показуючи, що вони мають однакову алгебраїчну структуру.</em></p>
         <h3>Теоретичні відомості:</h3>
         <ul>
             <li><b>Координати вектора</b> $x$ в базі $e=(e_1, \dots, e_n)$: $x = \sum x_i e_i$. Стовпець $X=(x_i)$.</li>
@@ -618,16 +956,33 @@
             <li><b>Ізоморфізм</b> $\varphi: L \to L'$: бієктивне лінійне відображення.</li>
             <li>$L_1 \cong L_2 \iff \dim L_1 = \dim L_2$.</li>
         </ul>
+        <div class="important-info-box">
+            <h4>Важливо:</h4>
+            <ul>
+                <li><strong>Координати вектора $x$ в базі $e=(e_i)$:</strong> Якщо $x = \sum_{i=1}^n \xi_i e_i$, то $(\xi_1, \dots, \xi_n)$ - координати.</li>
+                <li><strong>Матриця переходу $T$ від бази $e$ до бази $e'$:</strong> Стовпці матриці $T$ є координатними стовпцями векторів нової бази $e'$ у старій базі $e$.</li>
+                <li><strong>Формули перетворення координат:</strong> $X = TX'$ (від нових до старих), $X' = T^{-1}X$ (від старих до нових), де $X, X'$ - координатні стовпці вектора.</li>
+                <li><strong>Ізоморфізм лінійних просторів $\varphi: L \to L'$:</strong> Бієктивне відображення, що зберігає лінійні операції: $\varphi(\lambda x + \mu y) = \lambda\varphi(x) + \mu\varphi(y)$.</li>
+                <li><strong>Критерій ізоморфності:</strong> $L_1 \cong L_2 \iff \dim L_1 = \dim L_2$ (для скінченновимірних просторів над одним полем).</li>
+            </ul>
+        </div>
 
         <h2 id="topic15">15. Евклідові й унітарні простори.</h2>
+        <p><em>Евклідові (над $\mathbb{R}$) та унітарні (над $\mathbb{C}$) простори є лінійними просторами, збагаченими поняттям скалярного добутку. Скалярний добуток дозволяє ввести метричні поняття, такі як довжина (норма) вектора та кут між векторами (в евклідовому випадку), а також ортогональність. Ці поняття є ключовими для геометричних застосувань лінійної алгебри та для вивчення спеціальних класів лінійних операторів.</em></p>
+        <div class="explanation-box">
+            <h5>Що таке "скалярний добуток" в загальному сенсі?</h5>
+            <p>У школі ми звикли до скалярного добутку векторів як добутку їх довжин на косинус кута між ними. В лінійній алгебрі це поняття узагальнюється. Скалярний добуток – це операція, яка двом векторам ставить у відповідність число (скаляр) і має певні властивості, схожі на властивості "шкільного" скалярного добутку: він дозволяє говорити про "довжину" вектора (через $(a,a)$) та "ортогональність" (коли $(a,b)=0$). Для просторів над комплексними числами (унітарних) є нюанс із комплексним спряженням для симетричності.</p>
+        </div>
         <h3>Теоретичні відомості:</h3>
         <ul>
             <li><b>Скалярний добуток</b> $(a,b)$ в $L$ над $\mathbb{R}$ (евклідів) або $\mathbb{C}$ (унітарний).
                 Аксіоми:
-                1. $(a,b) = (b,a)$ (для евклідового); $(a,b) = \overline{(b,a)}$ (для унітарного).
-                2. $(\lambda a, b) = \lambda(a,b)$.
-                3. $(a+b, c) = (a,c) + (b,c)$.
-                4. $(a,a) \ge 0$, і $(a,a)=0 \iff a=0_L$.
+                <ol>
+                    <li>$(a,b) = (b,a)$ (для евклідового); $(a,b) = \overline{(b,a)}$ (для унітарного).</li>
+                    <li>$(\lambda a, b) = \lambda(a,b)$. Для унітарного $(a, \lambda b) = \bar{\lambda}(a,b)$.</li>
+                    <li>$(a+b, c) = (a,c) + (b,c)$.</li>
+                    <li>$(a,a) \ge 0$, і $(a,a)=0 \iff a=0_L$.</li>
+                </ol>
             </li>
             <li><b>Норма</b>: $\|a\| = \sqrt{(a,a)}$.</li>
             <li><b>Нерівність Коші-Буняковського</b>: $|(a,b)| \le \|a\| \cdot \|b\|$.</li>
@@ -635,27 +990,68 @@
             <li><b>Ортонормована база (ОНБ)</b>: $(e_i, e_j) = \delta_{ij}$.</li>
             <li><b>Процес ортогоналізації Грама-Шмідта</b>.</li>
         </ul>
+        <div class="important-info-box">
+            <h4>Важливо:</h4>
+            <ul>
+                <li><strong>Скалярний добуток $(a,b)$ в евклідовому просторі:</strong> симетричний, білінійний, додатно визначений.</li>
+                <li><strong>Скалярний добуток $(a,b)$ в унітарному просторі:</strong> ермітово-симетричний ($(a,b) = \overline{(b,a)}$), лінійний за першим аргументом, антилінійний за другим ($(a, \lambda b) = \bar{\lambda}(a,b)$), додатно визначений.</li>
+                <li><strong>Норма вектора:</strong> $\|a\| = \sqrt{(a,a)}$.</li>
+                <li><strong>Нерівність Коші-Буняковського:</strong> $|(a,b)| \le \|a\| \cdot \|b\|$.</li>
+                <li><strong>Ортонормована база (ОНБ) $\{e_i\}$:</strong> $(e_i, e_j) = \delta_{ij}$ (1 якщо $i=j$, 0 якщо $i \neq j$).</li>
+            </ul>
+        </div>
 
         <h2 id="topic16">16. Ортогональні підпростори й ортогональні доповнення.</h2>
+        <p><em>Поняття ортогональності поширюється з векторів на цілі підпростори. Ортогональне доповнення до підпростору є важливим інструментом для розкладання простору на ортогональні компоненти, що спрощує розгляд багатьох задач, зокрема, знаходження проекцій векторів та розв'язання систем лінійних рівнянь методом найменших квадратів. Це дозволяє "розділити" простір на дві взаємно перпендикулярні частини.</em></p>
         <h3>Теоретичні відомості:</h3>
         <ul>
             <li>$U \perp V \iff \forall u \in U, \forall v \in V, (u,v)=0$.</li>
             <li><b>Ортогональне доповнення</b> $U^\perp = \{v \in E \mid (u,v)=0, \forall u \in U\}$.</li>
-            <li>$E = U \oplus U^\perp$.</li>
+            <li>$E = U \oplus U^\perp$ (для скінченновимірного $U$). Це означає, що будь-який $x \in E$ однозначно представляється як $x = y+z$, де $y \in U$ (<b>ортогональна проекція</b> $x$ на $U$) і $z \in U^\perp$ (<b>ортогональна складова</b> $x$ відносно $U$).</li>
             <li>$\dim U + \dim U^\perp = \dim E$.</li>
+            <li>$(U^\perp)^\perp = U$.</li>
         </ul>
+        <div class="important-info-box">
+            <h4>Важливо:</h4>
+            <ul>
+                <li><strong>Ортогональні підпростори $U \perp V$:</strong> $(u,v)=0$ для всіх $u \in U, v \in V$.</li>
+                <li><strong>Ортогональне доповнення $U^\perp$:</strong> $U^\perp = \{v \in E \mid \forall u \in U, (v,u)=0 \}$.</li>
+                <li><strong>Теорема про ортогональний розклад:</strong> Для скінченновимірного підпростору $U$ простору $E$, $E = U \oplus U^\perp$.</li>
+                <li><strong>Зв'язок розмірностей:</strong> $\dim U + \dim U^\perp = \dim E$.</li>
+            </ul>
+        </div>
 
         <h2 id="topic17">17. Лінійні оператори та їхні матриці.</h2>
+        <p><em>Лінійні оператори – це відображення між лінійними просторами, які зберігають структуру цих просторів, тобто поважають операції додавання векторів та множення на скаляр. У скінченновимірних просторах кожному лінійному оператору можна поставити у відповідність матрицю (після вибору баз), що дозволяє зводити дії з операторами до дій з матрицями. Зміна бази призводить до перетворення матриці оператора за допомогою матриці переходу, при цьому нові та старі матриці оператора є подібними.</em></p>
         <h3>Теоретичні відомості:</h3>
         <ul>
             <li><b>Лінійний оператор</b> $\varphi: L \to M$: $\varphi(\alpha x + \beta y) = \alpha\varphi(x) + \beta\varphi(y)$.</li>
             <li><b>Матриця оператора $A$</b> в базах $e$ (в $L$) і $f$ (в $M$): стовпці $A$ - координати $\varphi(e_j)$ в базі $f$.</li>
             <li>Якщо $Y$ - координати $\varphi(x)$, $X$ - координати $x$, то $Y=AX$.</li>
             <li>Матриця суми/добутку на скаляр/добутку операторів - сума/добуток на скаляр/добуток матриць.</li>
-            <li><b>Перетворення матриці оператора</b> $\varphi: L \to L$ при зміні бази: $A' = T^{-1}AT$. $A, A'$ - подібні.</li>
+            <li><b>Перетворення матриці оператора</b> $\varphi: L \to L$ при зміні бази: $A' = T^{-1}AT$. $A, A'$ - <b>подібні</b>.</li>
         </ul>
+         <div class="explanation-box">
+            <h5>Що таке "подібні матриці"?</h5>
+            <p>Дві квадратні матриці $A$ і $A'$ називаються подібними, якщо існує така невироджена матриця $T$, що $A' = T^{-1}AT$. Важливо розуміти, що подібні матриці є матрицями одного й того ж лінійного оператора, але записаними в різних базах. Матриця $T$ при цьому є матрицею переходу від "старої" бази до "нової". Подібні матриці мають багато однакових характеристик: визначник, слід, ранг, характеристичний многочлен (а отже, і власні значення).</p>
+        </div>
+        <div class="important-info-box">
+            <h4>Важливо:</h4>
+            <ul>
+                <li><strong>Лінійний оператор $\varphi$:</strong> $\varphi(\lambda x + \mu y) = \lambda\varphi(x) + \mu\varphi(y)$.</li>
+                <li><strong>Матриця оператора $A$ (в базах $e, f$):</strong> $j$-й стовпець матриці $A$ – це координатний стовпець вектора $\varphi(e_j)$ в базі $f$.</li>
+                <li><strong>Зв'язок координат:</strong> $Y=AX$ (де $Y$ – координати образу $\varphi(x)$, $X$ – координати $x$).</li>
+                <li><strong>Матриця композиції (добутку) операторів $\varphi\psi$:</strong> $A_{\varphi\psi} = A_\varphi A_\psi$.</li>
+                <li><strong>Зміна матриці оператора при переході до нової бази $e'$ (з матрицею переходу $T$ від $e$ до $e'$):</strong> $A' = T^{-1}AT$.</li>
+            </ul>
+        </div>
 
         <h2 id="topic18">18. Власні значення та власні вектори. Оператори простої структури.</h2>
+        <p><em>Власні вектори лінійного оператора – це особливі напрямки, які під дією оператора не змінюють свого напрямку, а лише масштабуються на величину, що називається власним значенням. Знаходження власних значень та векторів є ключовою задачею в багатьох застосуваннях лінійної алгебри, наприклад, у теорії диференціальних рівнянь, квантовій механіці, аналізі стійкості систем. Оператори простої структури є найпростішими для аналізу, оскільки для них існує база з власних векторів, в якій їх матриця стає діагональною.</em></p>
+        <div class="explanation-box">
+            <h5>Що таке "алгебрична" та "геометрична" кратність власного значення?</h5>
+            <p><strong>Алгебрична кратність</strong> власного значення $\lambda_0$ – це скільки разів $(\lambda - \lambda_0)$ є множником у характеристичному многочлені. Наприклад, якщо $\det(A-\lambda E) = (\lambda-2)^3(\lambda-5)$, то алгебрична кратність $\lambda=2$ дорівнює 3. <strong>Геометрична кратність</strong> власного значення $\lambda_0$ – це розмірність простору всіх власних векторів, що відповідають цьому $\lambda_0$ (тобто, скільки лінійно незалежних власних векторів можна знайти для цього $\lambda_0$). Геометрична кратність ніколи не перевищує алгебричну. Якщо для всіх власних значень вони збігаються, оператор "хороший" (простої структури) і його матрицю можна діагоналізувати.</p>
+        </div>
         <h3>Теоретичні відомості:</h3>
         <ul>
             <li><b>Власний вектор</b> $x \neq 0_L$: $\varphi(x) = \lambda x$. $\lambda$ - <b>власне значення</b>.</li>
@@ -668,6 +1064,16 @@
             <li><b>Геометрична кратність</b> $\lambda_i$: $\dim V_{\lambda_i}$.</li>
             <li>Геометрична $\le$ Алгебрична. Рівність для всіх $\lambda_i \iff$ оператор простої структури.</li>
         </ul>
+        <div class="important-info-box">
+            <h4>Важливо:</h4>
+            <ul>
+                <li><strong>Рівняння для власних векторів та значень:</strong> $\varphi(x) = \lambda x$ (де $x \neq 0_L$), або в матричній формі $AX = \lambda X$.</li>
+                <li><strong>Характеристичне рівняння:</strong> $\det(A - \lambda E) = 0$. Корені – власні значення.</li>
+                <li><strong>Власний підпростір $V_{\lambda_i}$:</strong> множина всіх розв'язків системи $(A - \lambda_i E)X = 0$.</li>
+                <li><strong>Оператор простої структури:</strong> існує база з власних векторів; його матрицю можна діагоналізувати ($A' = T^{-1}AT = \text{diag}(\lambda_1, \dots, \lambda_n)$).</li>
+                <li><strong>Критерій простої структури:</strong> для кожного власного значення $\lambda_i$ його алгебрична кратність дорівнює геометричній кратності (і сума алгебричних кратностей дорівнює $\dim L$, якщо поле алгебраїчно замкнене).</li>
+            </ul>
+        </div>
 
     </div>
 </div>
@@ -779,14 +1185,12 @@
         }
     });
     
-    // Автоматична прокрутка до активного елемента в сайдбарі при завантаженні
     document.addEventListener('DOMContentLoaded', () => {
         const currentHash = window.location.hash;
         if (currentHash) {
             const activeLink = sidebarElement.querySelector(`.sidebar-content a[href="${currentHash}"]`);
             if (activeLink) {
                 activeLink.classList.add('active');
-                // Прокрутка до активного елемента
                 activeLink.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         } else {
