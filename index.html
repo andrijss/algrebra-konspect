@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конспект з Алгебри та Геометрії (Material Design)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          },
+          svg: {
+            fontCache: 'global'
+          }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+    <style>
+        :root {
+            --primary-color: #6200EE; /* Фіолетовий */
+            --primary-variant-color: #3700B3;
+            --secondary-color: #03DAC6; /* Бірюзовий */
+            --background-color-light: #FFFFFF;
+            --surface-color-light: #FFFFFF;
+            --on-primary-color-light: #FFFFFF;
+            --on-surface-color-light: #000000;
+            --text-primary-light: rgba(0, 0, 0, 0.87);
+            --text-secondary-light: rgba(0, 0, 0, 0.6);
+            --divider-light: rgba(0, 0, 0, 0.12);
+
+            --background-color-dark: #121212;
+            --surface-color-dark: #1E1E1E;
+            --on-primary-color-dark: #000000;
+            --on-surface-color-dark: #E0E0E0;
+            --text-primary-dark: rgba(255, 255, 255, 0.87);
+            --text-secondary-dark: rgba(255, 255, 255, 0.6);
+            --divider-dark: rgba(255, 255, 255, 0.12);
+
+            --elevation-01: 0 2px 1px -1px rgba(0,0,0,0.2), 0 1px 1px 0 rgba(0,0,0,0.14), 0 1px 3px 0 rgba(0,0,0,0.12);
+            --elevation-04: 0 2px 4px -1px rgba(0,0,0,0.2), 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12);
+            --elevation-08: 0 5px 5px -3px rgba(0,0,0,0.2), 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12);
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color-light);
+            color: var(--text-primary-light);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            padding: 20px;
+            transition: margin-left 0.3s;
+            margin-left: 0; 
+        }
+        .sidebar {
+            height: 100%;
+            width: 280px;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: -290px; 
+            background-color: var(--surface-color-light);
+            overflow-y: auto; 
+            overflow-x: hidden;
+            padding-top: 0; 
+            transition: left 0.3s ease-in-out;
+            box-shadow: var(--elevation-08);
+            display: flex; 
+            flex-direction: column; 
+        }
+        .sidebar.open {
+            left: 0;
+        }
+        .sidebar-header { 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 8px 0 16px; 
+            border-bottom: 1px solid var(--divider-light);
+            min-height: 56px; 
+        }
+        .sidebar-header h3 {
+            padding: 0;
+            margin:0;
+            font-weight: 500;
+            color: var(--text-primary-light);
+            border-bottom: none; 
+        }
+        .sidebar-close-btn { 
+            background: none;
+            border: none;
+            color: var(--text-secondary-light);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .sidebar-close-btn:hover {
+            background-color: rgba(0,0,0,0.08);
+        }
+        .sidebar-content { 
+            flex-grow: 1; 
+            overflow-y: auto; 
+        }
+        .sidebar-content ul {
+            list-style-type: none;
+            padding: 8px 0;
+            margin: 0;
+        }
+        .sidebar-content li a {
+            padding: 12px 16px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--primary-color);
+            display: block;
+            transition: background-color 0.2s;
+            border-radius: 0 24px 24px 0;
+        }
+        .sidebar-content li a:hover, .sidebar-content li a.active {
+            background-color: rgba(var(--primary-color-rgb, 98,0,238), 0.08);
+        }
+         .sidebar-content li a.active {
+             color: var(--primary-color);
+             font-weight: 700;
+         }
+
+        .menu-btn-container {
+            position: fixed;
+            top: 8px; 
+            left: 8px;
+            z-index: 1001;
+        }
+        .menu-btn {
+            background-color: var(--surface-color-light);
+            color: var(--text-primary-light);
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: var(--elevation-04);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            transition: background-color 0.2s, box-shadow 0.2s;
+        }
+        .menu-btn:hover {
+            box-shadow: var(--elevation-08);
+        }
+        .menu-btn .material-icons { font-size: 24px; }
+
+
+        .main-content h1 {
+            text-align: center;
+            font-weight: 400;
+            color: var(--text-primary-light);
+            margin-top: 60px; 
+        }
+        .main-content h2 {
+            font-weight: 500;
+            color: var(--text-primary-light);
+            border-bottom: 1px solid var(--divider-light);
+            padding-bottom: 8px;
+            margin-top: 32px;
+        }
+         .main-content h3 {
+            font-weight: 500;
+            color: var(--text-secondary-light);
+            margin-top: 24px;
+        }
+
+        ul, ol { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+
+        .toc {
+            background-color: var(--surface-color-light);
+            border: 1px solid var(--divider-light);
+            border-radius: 4px;
+            padding: 16px;
+            margin: 24px auto;
+            width: 90%;
+            max-width: 700px; /* Збільшено для більшої кількості тем */
+            box-shadow: var(--elevation-01);
+        }
+        .toc h3 { margin-top: 0; text-align: center; font-weight: 500; }
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+        .toc li { margin-bottom: 0; }
+        .toc li a {
+            display: inline-block;
+            text-decoration: none;
+            background-color: var(--primary-color);
+            color: var(--on-primary-color-light);
+            padding: 8px 12px; /* Трохи менші кнопки для більшої кількості */
+            border-radius: 4px;
+            transition: background-color 0.2s, box-shadow 0.2s;
+            text-transform: uppercase;
+            font-weight: 500;
+            font-size: 13px; /* Трохи менший шрифт */
+            box-shadow: var(--elevation-01);
+            border: none; 
+            cursor: pointer;
+        }
+        .toc li a:hover {
+            background-color: var(--primary-variant-color);
+            box-shadow: var(--elevation-04);
+        }
+
+        /* Dark theme styles */
+        body.dark-theme {
+            background-color: var(--background-color-dark);
+            color: var(--text-primary-dark);
+        }
+        body.dark-theme .sidebar {
+            background-color: var(--surface-color-dark);
+            border-right-color: var(--divider-dark);
+        }
+        body.dark-theme .sidebar-header {
+            border-bottom-color: var(--divider-dark);
+        }
+        body.dark-theme .sidebar-header h3 {
+            color: var(--text-primary-dark);
+        }
+        body.dark-theme .sidebar-close-btn {
+            color: var(--text-secondary-dark);
+        }
+        body.dark-theme .sidebar-close-btn:hover {
+            background-color: rgba(255,255,255,0.08);
+        }
+        body.dark-theme .sidebar-content li a {
+            color: var(--secondary-color);
+        }
+         body.dark-theme .sidebar-content li a:hover, body.dark-theme .sidebar-content li a.active {
+             background-color: rgba(var(--secondary-color-rgb, 3,218,198), 0.08);
+         }
+         body.dark-theme .sidebar-content li a.active {
+             color: var(--secondary-color);
+         }
+
+        body.dark-theme .menu-btn {
+            background-color: var(--surface-color-dark);
+            color: var(--text-primary-dark);
+        }
+         body.dark-theme .menu-btn:hover {
+             background-color: rgba(224, 224, 224, 0.08); /* Зміна кольору при наведенні для темної теми */
+        }
+
+        body.dark-theme .main-content h1,
+        body.dark-theme .main-content h2 {
+            color: var(--text-primary-dark);
+            border-bottom-color: var(--divider-dark);
+        }
+         body.dark-theme .main-content h3 {
+            color: var(--text-secondary-dark);
+        }
+        body.dark-theme .toc {
+            background-color: var(--surface-color-dark);
+            border-color: var(--divider-dark);
+        }
+        body.dark-theme .toc li a {
+            background-color: var(--secondary-color);
+            color: var(--on-primary-color-dark);
+        }
+        body.dark-theme .toc li a:hover {
+            background-color: #01BDAF; 
+        }
+
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+            padding: 16px; 
+            border-top: 1px solid var(--divider-light);
+            margin-top: auto; 
+        }
+        body.dark-theme .theme-switch-wrapper {
+            border-top-color: var(--divider-dark);
+        }
+        .theme-switch-text {
+            margin-right: 10px;
+            font-size: 14px;
+            color: var(--text-secondary-light);
+        }
+        body.dark-theme .theme-switch-text {
+            color: var(--text-secondary-dark);
+        }
+        .theme-switch {
+            display: inline-block;
+            height: 14px;
+            position: relative;
+            width: 36px;
+        }
+        .theme-switch input { display:none; }
+        .slider {
+            background-color: #BDBDBD; 
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: .4s;
+            border-radius: 14px;
+        }
+        .slider:before {
+            background-color: var(--surface-color-light); 
+            bottom: 2px;
+            content: "";
+            height: 10px;
+            left: 2px;
+            position: absolute;
+            transition: .4s;
+            width: 10px;
+            border-radius: 50%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.14), 0 2px 1px -1px rgba(0,0,0,0.12);
+        }
+        body.dark-theme .slider:before {
+            background-color: #424242; /* Темніша кулька для темної теми, якщо неактивна */
+        }
+        input:checked + .slider {
+            background-color: var(--secondary-color);
+        }
+        body.dark-theme input:checked + .slider {
+            background-color: var(--primary-color); 
+        }
+        input:checked + .slider:before {
+            transform: translateX(22px);
+            background-color: var(--surface-color-light); 
+        }
+        body.dark-theme input:checked + .slider:before {
+            background-color: var(--surface-color-dark);
+        }
+
+        @media screen and (min-width: 961px) { 
+            .container {
+                margin-left: 280px;
+            }
+            .sidebar {
+                left: 0;
+                box-shadow: var(--elevation-04);
+            }
+            .menu-btn-container {
+                display: none;
+            }
+             .sidebar-close-btn { /* Ховаємо кнопку закриття на десктопі */
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="menu-btn-container">
+    <button class="menu-btn" id="menuToggleBtn" aria-label="Відкрити меню">
+        <i class="material-icons" id="menuIcon">menu</i>
+    </button>
+</div>
+
+<div class="sidebar" id="mySidebar">
+    <div class="sidebar-header">
+        <h3>Зміст</h3>
+        <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Закрити меню">
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+    <div class="sidebar-content">
+        <ul>
+            <li><a href="#topic1" onclick="closeSidebarAndSetActive(this)">1. Відношення подільності...</a></li>
+            <li><a href="#topic2" onclick="closeSidebarAndSetActive(this)">2. Прості та складені числа...</a></li>
+            <li><a href="#topic3" onclick="closeSidebarAndSetActive(this)">3. НСД і НСК...</a></li>
+            <li><a href="#topic4" onclick="closeSidebarAndSetActive(this)">4. Матриці та дії...</a></li>
+            <li><a href="#topic5" onclick="closeSidebarAndSetActive(this)">5. Визначники</a></li>
+            <li><a href="#topic6" onclick="closeSidebarAndSetActive(this)">6. Обчислення визначників</a></li>
+            <li><a href="#topic7" onclick="closeSidebarAndSetActive(this)">7. Обернена матриця</a></li>
+            <li><a href="#topic8" onclick="closeSidebarAndSetActive(this)">8. Конгруенції...</a></li>
+            <li><a href="#topic9" onclick="closeSidebarAndSetActive(this)">9. Класи лишків...</a></li>
+            <li><a href="#topic10" onclick="closeSidebarAndSetActive(this)">10. Теореми Ейлера і Ферма</a></li>
+            <li><a href="#topic11" onclick="closeSidebarAndSetActive(this)">11. Поле комплексних чисел</a></li>
+            <li><a href="#topic12" onclick="closeSidebarAndSetActive(this)">12. Тригонометрична форма...</a></li>
+            <li><a href="#topic13" onclick="closeSidebarAndSetActive(this)">13. Лінійні простори...</a></li>
+            <li><a href="#topic14" onclick="closeSidebarAndSetActive(this)">14. Координати і перетворення...</a></li>
+            <li><a href="#topic15" onclick="closeSidebarAndSetActive(this)">15. Евклідові й унітарні простори</a></li>
+            <li><a href="#topic16" onclick="closeSidebarAndSetActive(this)">16. Ортогональні підпростори...</a></li>
+            <li><a href="#topic17" onclick="closeSidebarAndSetActive(this)">17. Лінійні оператори...</a></li>
+            <li><a href="#topic18" onclick="closeSidebarAndSetActive(this)">18. Власні значення та вектори...</a></li>
+        </ul>
+    </div>
+    <div class="theme-switch-wrapper">
+        <span class="theme-switch-text">Темна тема:</span>
+        <label class="theme-switch">
+            <input type="checkbox" id="themeToggle">
+            <span class="slider"></span>
+        </label>
+    </div>
+</div>
+
+<div class="container" id="mainContainer">
+    <div class="main-content">
+        <h1>Конспект з Алгебри та Геометрії</h1>
+
+        <div class="toc">
+            <h3>Зміст</h3>
+            <ul>
+                <li><a href="#topic1">1. Подільність</a></li>
+                <li><a href="#topic2">2. Прості числа</a></li>
+                <li><a href="#topic3">3. НСД, НСК</a></li>
+                <li><a href="#topic4">4. Матриці</a></li>
+                <li><a href="#topic5">5. Визначники</a></li>
+                <li><a href="#topic6">6. Обч. визначників</a></li>
+                <li><a href="#topic7">7. Оберн. матриця</a></li>
+                <li><a href="#topic8">8. Конгруенції</a></li>
+                <li><a href="#topic9">9. Класи лишків</a></li>
+                <li><a href="#topic10">10. Ейлер, Ферма</a></li>
+                <li><a href="#topic11">11. Компл. числа</a></li>
+                <li><a href="#topic12">12. Триг. форма</a></li>
+                <li><a href="#topic13">13. Лін. простори</a></li>
+                <li><a href="#topic14">14. Координати</a></li>
+                <li><a href="#topic15">15. Евкл./Уніт. простори</a></li>
+                <li><a href="#topic16">16. Ортог. підпр.</a></li>
+                <li><a href="#topic17">17. Лін. оператори</a></li>
+                <li><a href="#topic18">18. Власні знач.</a></li>
+            </ul>
+        </div>
+
+        <h2 id="topic1">1. Відношення подільності, його найпростіші властивості. Теорема про ділення з остачею.</h2>
+        <h3>Теоретичні відомості:</h3>
+        <ul>
+            <li>Якщо для цілих чисел $a$ і $b$ в кільці цілих чисел $\mathbb{Z}$ існує таке ціле число $q$, що $a = bq$, то кажуть, що "$a$ <b>ділиться</b> на $b$" або "$b$ <b>ділить</b> $a$" і пишуть $a \vdots b$ або $b|a$. Число $a$ називають <b>кратним</b> числа $b$, а $b$ - <b>дільником</b> числа $a$.</li>
+            <li><b>Властивості подільності</b> (для довільних цілих $a, b, c, m, n$):
+                <ol>
+                    <li>$a|a$.</li>
+                    <li>$0 \vdots a$.</li>
+                    <li>$a \vdots \pm 1$.</li>
+                    <li>Якщо $a \vdots 0$, то $a=0$.</li>
+                    <li>Якщо $a|b$ і $b|c$, то $a|c$.</li>
+                    <li>Якщо $a|b$, то $ac|bc$.</li>
+                    <li>Якщо $c|a$ і $c|b$, то $c|(a \pm b)$.</li>
+                    <li>Якщо $c|a$ і $c|(a \pm b)$, то $c|b$.</li>
+                    <li>Якщо $a|c$ і $b \nmid c$, то $(a \pm b)$ не ділиться на $c$ (зауваження: це твердження в оригіналі потребує уточнення).</li>
+                    <li>Якщо $a \vdots b$, то $ac \vdots bc$.</li>
+                    <li>Якщо $ac \vdots bc$ і $c \neq 0$, то $a \vdots b$.</li>
+                    <li>Якщо $m|a$ і $n|b$, то $mn|ab$.</li>
+                    <li>Якщо $c|a$ і $c|b$, то $c|(ma \pm nb)$.</li>
+                    <li>Якщо $a|b$ і $b|a$, то $a = \pm b$.</li>
+                    <li>Якщо $a|b$ і $|b|<|a|$ ($a \neq 0$), то $b=0$.</li>
+                </ol>
+            </li>
+            <li><b>Теорема про ділення з остачею</b>: Для будь-яких цілих чисел $a$ і $b$, де $b \neq 0$, існує єдина пара цілих чисел $q$ і $r$ така, що $a = bq + r$, де $0 \le r < |b|$. Число $q$ називають <b>неповною часткою</b>, а $r$ - <b>остачею</b>.</li>
+            <li>Ціле число $a$ тоді і тільки тоді кратне цілому числу $b \neq 0$, коли остача від ділення $a$ на $b$ дорівнює нулю.</li>
+        </ul>
+
+        <h2 id="topic2">2. Означення і властивості простих та складених чисел. Решето Ератосфена. Канонічна форма натурального числа. Розподіл простих чисел серед чисел натурального ряду.</h2>
+        <h3>Теоретичні відомості:</h3>
+        <ul>
+            <li>Натуральне число $p > 1$, дільниками якого є тільки $1$ і $p$, називають <b>простим</b>.</li>
+            <li>Натуральне число $a > 1$, яке має дільники, відмінні від $1$ і $a$, називають <b>складеним</b>.</li>
+            <li>Число $1$ не належить ні до простих, ні до складених чисел.</li>
+            <li>Найменший натуральний дільник складеного числа $a$, відмінний від $1$, є число просте і не перевищує $\sqrt{a}$.</li>
+            <li><b>Теорема Евкліда</b>: Множина простих чисел нескінченна.</li>
+            <li><b>Основна теорема арифметики</b>: Кожне відмінне від $1$ натуральне число можна записати у вигляді добутку простих чисел, і притому єдиним способом (якщо не брати до уваги порядок розміщення множників).</li>
+            <li><b>Решето Ератосфена</b>: Метод для знаходження всіх простих чисел, що не перевищують даного натурального числа $a$.</li>
+            <li><b>Канонічна форма натурального числа</b>: $a = p_1^{k_1} p_2^{k_2} \dots p_m^{k_m}$, де $p_i$ - різні прості числа, $k_i$ - натуральні числа.</li>
+            <li>Довільний дільник $d$ числа $a$ має вигляд: $d = p_1^{l_1} p_2^{l_2} \dots p_m^{l_m}$, де $0 \le l_i \le k_i$.</li>
+            <li>$\pi(x)$ - число простих чисел, які не перевищують $x$.</li>
+            <li><b>Асимптотичний закон розподілу простих чисел</b>: $\lim_{x \to \infty} \left( \pi(x) : \frac{x}{\ln x} \right) = 1$.</li>
+            <li><b>Нерівності Чебишова</b>: $0.92129 \cdot \frac{x}{\ln x} < \pi(x) < 1.10555 \cdot \frac{x}{\ln x}$.</li>
+            <li><b>Теорема Діріхле</b>: У кожній арифметичній прогресії $an+b$, де $(a,b)=1$, міститься нескінченна множина простих чисел.</li>
+        </ul>
+
+        <h2 id="topic3">3. Найбільший спільний дільник і найменше спільне кратне та способи знаходження їх. Взаємно прості числа.</h2>
+         <h3>Теоретичні відомості:</h3>
+        <ul>
+            <li><b>Найбільший спільний дільник (НСД)</b> $(a_1, \dots, a_n)$: найбільший із спільних дільників.</li>
+            <li>Числа <b>взаємно прості</b>: $(a,b)=1$.</li>
+            <li><b>Алгоритм Евкліда</b>: для знаходження НСД$(a,b)$ послідовним діленням з остачею. $(a,b)$ - остання ненульова остача.</li>
+            <li><b>Лінійне зображення НСД</b>: $d = ax + by$.</li>
+            <li><b>Найменше спільне кратне (НСК)</b> $[a_1, \dots, a_n]$: найменше з додатних спільних кратних.</li>
+            <li>$[a,b] = \frac{|ab|}{(a,b)}$.</li>
+            <li><b>НСД і НСК через канонічний розклад</b>:
+                $a = \prod p_i^{k_i}$, $b = \prod p_i^{m_i}$.
+                $(a,b) = \prod p_i^{\min(k_i, m_i)}$.
+                $[a,b] = \prod p_i^{\max(k_i, m_i)}$.</li>
+        </ul>
+
+
+        <h2 id="topic4">4. Матриці та дії над ними.</h2>
+        <h3>Теоретичні відомості:</h3>
+        <ul>
+            <li><b>Матриця</b> $m \times n$: прямокутна таблиця чисел $A = (a_{ij})$.</li>
+            <li><b>Дії</b>: транспонування ($A^T$), множення на число ($\lambda A$), сума ($A+B$), добуток ($AB$). $c_{ij} = \sum_{p=1}^{k} a_{ip}b_{pj}$.</li>
+            <li><b>Властивості</b>: асоціативність множення, дистрибутивність, $(AB)^T = B^T A^T$.</li>
+            <li><b>Типи матриць</b>: нульова, діагональна ($\text{diag}(d_1, \dots, d_n)$), одинична ($E$), скалярна ($\lambda E$), симетрична ($A=A^T$), кососиметрична ($A=-A^T$), трикутна (верхня/нижня).</li>
+        </ul>
+
+        <h2 id="topic5">5. Визначники.</h2>
+        <h3>Теоретичні відомості:</h3>
+        <ul>
+            <li><b>Визначник 2-го порядку</b>: $|A| = a_{11}a_{22} - a_{12}a_{21}$.</li>
+            <li><b>Визначник 3-го порядку</b>: правило Саррюса (трикутників).</li>
+            <li><b>Визначник $n$-го порядку</b>: $\det A = \sum (-1)^t a_{1j_1}a_{2j_2}\dots a_{nj_n}$, $t$ - число інверсій.</li>
+            <li><b>Властивості</b>: $\det(A^T) = \det A$; $\det A = 0$ якщо є нульовий рядок/стовпець або пропорційні рядки/стовпці; знак змінюється при перестановці рядків/стовпців; винесення множника; не змінюється при додаванні до рядка/стовпця іншого, помноженого на число; $\det(AB) = \det A \cdot \det B$.</li>
+            <li><b>Формули Крамера</b>: для $A\vec{x} = \vec{b}$ з $\Delta = \det A \neq 0$, $x_j = \frac{\Delta_j}{\Delta}$.</li>
+        </ul>
+
+        <h2 id="topic6">6. Обчислення визначників.</h2>
+        <h3>Теоретичні відомості:</h3>
+        <ul>
+            <li><b>Мінор</b> $M_{ij}$ елемента $a_{ij}$: визначник матриці, отриманої викреслюванням $i$-го рядка та $j$-го стовпця.</li>
+            <li><b>Алгебричне доповнення</b> $A_{ij} = (-1)^{i+j}M_{ij}$.</li>
+            <li><b>Розклад за рядком/стовпцем (Теорема Лапласа)</b>: $\det A = \sum_{k=1}^{n} a_{ik}A_{ik}$ (за $i$-м рядком).</li>
+            <li>Визначник трикутної матриці - добуток діагональних елементів.</li>
+            <li><b>Метод зведення до трикутного вигляду</b>.</li>
+            <li><b>Визначник Вандермонда</b>: $\Delta_n = \prod_{1 \le j < i \le n} (x_i - x_j)$.</li>
+        </ul>
+
+        <h2 id="topic7">7. Обернена матриця.</h2>
+        <h3>Теоретичні відомості:</h3>
+        <ul>
+            <li>$A^{-1}$ - <b>обернена</b> до $A$, якщо $A A^{-1} = A^{-1} A = E$.</li>
+            <li>Існує $\iff \det A \neq 0$ ($A$ - невироджена).</li>
+            <li><b>Формула</b>: $A^{-1} = \frac{1}{\det A} (A_{ij})^T$, де $(A_{ij})^T$ - союзна матриця.</li>
+            <li><b>Метод Гаусса-Жордана</b>: $(A|E) \to (E|A^{-1})$ елементарними перетвореннями рядків.</li>
+            <li><b>Властивості</b>: $(AB)^{-1} = B^{-1}A^{-1}$; $(A^T)^{-1} = (A^{-1})^T$.</li>
+            <li><b>Матричні рівняння</b>: $AX=B \implies X=A^{-1}B$; $XA=B \implies X=BA^{-1}$.</li>
+        </ul>
+
+        <h2 id="topic8">8. Конгруенції в кільці цілих чисел та їхні найпростіші властивості.</h2>
+        <h3>Теоретичні відомості:</h3>
+        <ul>
+            <li>$a \equiv b \pmod{m} \iff m|(a-b)$.</li>
+            <li><b>Властивості</b>: рефлексивність, симетричність, транзитивність.
+                Якщо $a \equiv b \pmod m$ і $c \equiv d \pmod m$:
+                $a \pm c \equiv b \pm d \pmod m$.
+                $ac \equiv bd \pmod m$.
+                $a^k \equiv b^k \pmod m$ для $k \in \mathbb{N}$.
+                $f(a) \equiv f(b) \pmod m$ для многочлена $f(x)$ з цілими коефіцієнтами.
+            </li>
+            <li>Якщо $ac \equiv bc \pmod m$ і $d = (c,m)$, то $a \equiv b \pmod{m/d}$.</li>
+        </ul>
+
+        <h2 id="topic9">9. Класи лишків, повна і зведена системи лишків за даним модулем.</h2>
+        <h3>Теоретичні відомості:</h3>
+        <ul>
+            <li><b>Клас лишків</b> $\bar{a} = \{x \in \mathbb{Z} \mid x \equiv a \pmod m\}$.</li>
+            <li>Множина класів лишків $\mathbb{Z}_m = \{\bar{0}, \bar{1}, \dots, \overline{m-1}\}$ утворює кільце.</li>
+            <li>$\mathbb{Z}_m$ є полем $\iff m$ - просте число.</li>
+            <li><b>Повна система лишків</b>: набір з $m$ цілих чисел, по одному з кожного класу.</li>
+            <li><b>Зведена система лишків</b>: набір з $\varphi(m)$ цілих чисел, взаємно простих з $m$, по одному з кожного відповідного класу.</li>
+            <li>Множина класів лишків, взаємно простих з $m$, утворює мультиплікативну групу порядку $\varphi(m)$.</li>
+        </ul>
+
+        <h2 id="topic10">10. Теореми Ейлера і Ферма.</h2>
+        <h3>Теоретичні відомості:</h3>
+        <ul>
+            <li><b>Теорема Ейлера</b>: Якщо $(a,m)=1$, то $a^{\varphi(m)} \equiv 1 \pmod m$.</li>
+            <li><b>Мала теорема Ферма</b>: Якщо $p$ - просте і $p \nmid a$, то $a^{p-1} \equiv 1 \pmod p$.
+            Наслідок: $a^p \equiv a \pmod p$ для будь-якого цілого $a$.</li>
+        </ul>
+
+        <h2 id="topic11">11. Поле комплексних чисел.</h2>
+        <h3>Теоретичні відомості:</h3>
+        <ul>
+            <li><b>Алгебраїчна форма</b>: $z = a+bi$, $a,b \in \mathbb{R}$, $i^2 = -1$.</li>
+            <li>$\text{Re } z = a$, $\text{Im } z = b$.</li>
+            <li><b>Дії</b>: як з многочленами, враховуючи $i^2=-1$.</li>
+            <li><b>Спряжене</b>: $\bar{z} = a-bi$. Властивості: $\overline{z_1 \pm z_2} = \bar{z_1} \pm \bar{z_2}$, $\overline{z_1 z_2} = \bar{z_1} \bar{z_2}$, $z\bar{z} = |z|^2$.</li>
+            <li><b>Ділення</b>: $\frac{z_1}{z_2} = \frac{z_1 \bar{z_2}}{|z_2|^2}$.</li>
+            <li><b>Модуль</b>: $|z| = \sqrt{a^2+b^2}$.</li>
+            <li><b>Аргумент</b> $\varphi = \arg z$: кут, що $\cos\varphi = a/|z|$, $\sin\varphi = b/|z|$.</li>
+        </ul>
+
+        <h2 id="topic12">12. Тригонометрична форма комплексного числа та її застосування.</h2>
+        <h3>Теоретичні відомості:</h3>
+        <ul>
+            <li><b>Тригонометрична форма</b>: $z = r(\cos\varphi + i\sin\varphi)$, $r=|z|$.</li>
+            <li><b>Множення</b>: $z_1z_2 = r_1r_2(\cos(\varphi_1+\varphi_2) + i\sin(\varphi_1+\varphi_2))$.</li>
+            <li><b>Ділення</b>: $\frac{z_1}{z_2} = \frac{r_1}{r_2}(\cos(\varphi_1-\varphi_2) + i\sin(\varphi_1-\varphi_2))$.</li>
+            <li><b>Формула Муавра</b>: $z^n = r^n(\cos(n\varphi) + i\sin(n\varphi))$.</li>
+            <li><b>Корінь $n$-го степеня</b>: $\omega_k = \sqrt[n]{r} \left( \cos\frac{\varphi+2\pi k}{n} + i\sin\frac{\varphi+2\pi k}{n} \right)$, $k = 0, \dots, n-1$.</li>
+        </ul>
+
+        <h2 id="topic13">13. Лінійні простори та підпростори. База простору.</h2>
+        <h3>Теоретичні відомості:</h3>
+        <ul>
+            <li><b>Лінійний простір $L$ над полем $P$</b>: множина з операціями "+" та "$\cdot$" (на скаляр), що задовольняє 8 аксіом (абелева група за "+", дистрибутивності, асоціативність скалярного множення, $1 \cdot a = a$).</li>
+            <li><b>Лінійна комбінація</b>: $\sum \lambda_i a_i$.</li>
+            <li><b>Лінійна залежність/незалежність</b>.</li>
+            <li><b>Лінійний підпростір</b> $M \subseteq L$: замкнений відносно "+" та "$\cdot$".</li>
+            <li><b>Лінійна оболонка</b> $L(a_1, \dots, a_k)$.</li>
+            <li><b>База</b>: максимальна лінійно незалежна система; або мінімальна система твірних.</li>
+            <li><b>Розмірність</b> $\dim L$: кількість векторів у базі.</li>
+        </ul>
+
+        <h2 id="topic14">14. Координати і перетворення координат у лінійних просторах. Ізоморфізм лінійних просторів.</h2>
+        <h3>Теоретичні відомості:</h3>
+        <ul>
+            <li><b>Координати вектора</b> $x$ в базі $e=(e_1, \dots, e_n)$: $x = \sum x_i e_i$. Стовпець $X=(x_i)$.</li>
+            <li><b>Матриця переходу $T$</b> від бази $e$ до $e'$: стовпці $T$ - координати векторів $e'_j$ в базі $e$. $e' = eT$.</li>
+            <li><b>Перетворення координат</b>: $X = TX'$, $X' = T^{-1}X$.</li>
+            <li><b>Ізоморфізм</b> $\varphi: L \to L'$: бієктивне лінійне відображення.</li>
+            <li>$L_1 \cong L_2 \iff \dim L_1 = \dim L_2$.</li>
+        </ul>
+
+        <h2 id="topic15">15. Евклідові й унітарні простори.</h2>
+        <h3>Теоретичні відомості:</h3>
+        <ul>
+            <li><b>Скалярний добуток</b> $(a,b)$ в $L$ над $\mathbb{R}$ (евклідів) або $\mathbb{C}$ (унітарний).
+                Аксіоми:
+                1. $(a,b) = (b,a)$ (для евклідового); $(a,b) = \overline{(b,a)}$ (для унітарного).
+                2. $(\lambda a, b) = \lambda(a,b)$.
+                3. $(a+b, c) = (a,c) + (b,c)$.
+                4. $(a,a) \ge 0$, і $(a,a)=0 \iff a=0_L$.
+            </li>
+            <li><b>Норма</b>: $\|a\| = \sqrt{(a,a)}$.</li>
+            <li><b>Нерівність Коші-Буняковського</b>: $|(a,b)| \le \|a\| \cdot \|b\|$.</li>
+            <li><b>Ортогональність</b>: $a \perp b \iff (a,b)=0$.</li>
+            <li><b>Ортонормована база (ОНБ)</b>: $(e_i, e_j) = \delta_{ij}$.</li>
+            <li><b>Процес ортогоналізації Грама-Шмідта</b>.</li>
+        </ul>
+
+        <h2 id="topic16">16. Ортогональні підпростори й ортогональні доповнення.</h2>
+        <h3>Теоретичні відомості:</h3>
+        <ul>
+            <li>$U \perp V \iff \forall u \in U, \forall v \in V, (u,v)=0$.</li>
+            <li><b>Ортогональне доповнення</b> $U^\perp = \{v \in E \mid (u,v)=0, \forall u \in U\}$.</li>
+            <li>$E = U \oplus U^\perp$.</li>
+            <li>$\dim U + \dim U^\perp = \dim E$.</li>
+        </ul>
+
+        <h2 id="topic17">17. Лінійні оператори та їхні матриці.</h2>
+        <h3>Теоретичні відомості:</h3>
+        <ul>
+            <li><b>Лінійний оператор</b> $\varphi: L \to M$: $\varphi(\alpha x + \beta y) = \alpha\varphi(x) + \beta\varphi(y)$.</li>
+            <li><b>Матриця оператора $A$</b> в базах $e$ (в $L$) і $f$ (в $M$): стовпці $A$ - координати $\varphi(e_j)$ в базі $f$.</li>
+            <li>Якщо $Y$ - координати $\varphi(x)$, $X$ - координати $x$, то $Y=AX$.</li>
+            <li>Матриця суми/добутку на скаляр/добутку операторів - сума/добуток на скаляр/добуток матриць.</li>
+            <li><b>Перетворення матриці оператора</b> $\varphi: L \to L$ при зміні бази: $A' = T^{-1}AT$. $A, A'$ - подібні.</li>
+        </ul>
+
+        <h2 id="topic18">18. Власні значення та власні вектори. Оператори простої структури.</h2>
+        <h3>Теоретичні відомості:</h3>
+        <ul>
+            <li><b>Власний вектор</b> $x \neq 0_L$: $\varphi(x) = \lambda x$. $\lambda$ - <b>власне значення</b>.</li>
+            <li><b>Характеристичне рівняння</b>: $\det(A - \lambda E) = 0$. Його корені - власні значення.</li>
+            <li>Для $\lambda_i$ власні вектори - ненульові розв'язки $(A - \lambda_i E)X = 0$.</li>
+            <li><b>Власний підпростір</b> $V_\lambda = \text{Ker}(\varphi - \lambda\varepsilon)$.</li>
+            <li><b>Оператор простої структури</b>: якщо існує база з власних векторів. Матриця в такій базі діагональна: $\text{diag}(\lambda_1, \dots, \lambda_n)$.</li>
+            <li>Якщо всі $\lambda_i$ різні, оператор має просту структуру.</li>
+            <li><b>Алгебрична кратність</b> $\lambda_i$: кратність як кореня характ. многочлена.</li>
+            <li><b>Геометрична кратність</b> $\lambda_i$: $\dim V_{\lambda_i}$.</li>
+            <li>Геометрична $\le$ Алгебрична. Рівність для всіх $\lambda_i \iff$ оператор простої структури.</li>
+        </ul>
+
+    </div>
+</div>
+
+<script>
+    const themeToggleSwitch = document.getElementById('themeToggle');
+    const bodyElement = document.body;
+    const sidebarElement = document.getElementById('mySidebar');
+    const menuToggleBtnElement = document.getElementById('menuToggleBtn');
+    const menuIconElement = document.getElementById('menuIcon');
+    const sidebarCloseBtnElement = document.getElementById('sidebarCloseBtn');
+
+    function setLightTheme() {
+        bodyElement.classList.remove('dark-theme');
+        localStorage.setItem('theme', 'light-theme');
+        if(themeToggleSwitch) themeToggleSwitch.checked = false;
+        updateRootColors(false);
+    }
+
+    function setDarkTheme() {
+        bodyElement.classList.add('dark-theme');
+        localStorage.setItem('theme', 'dark-theme');
+        if(themeToggleSwitch) themeToggleSwitch.checked = true;
+        updateRootColors(true);
+    }
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark-theme') {
+        setDarkTheme();
+    } else if (savedTheme === 'light-theme') {
+        setLightTheme();
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setDarkTheme();
+    } else {
+        setLightTheme(); 
+    }
+
+    if(themeToggleSwitch) {
+        themeToggleSwitch.addEventListener('change', function(e) {
+            if (e.target.checked) {
+                setDarkTheme();
+            } else {
+                setLightTheme();
+            }
+        });
+    }
+    
+    function updateRootColors(isDark) {
+        const primaryColorRGB = isDark ? '187,134,252' : '98,0,238'; 
+        const secondaryColorRGB = '3,218,198';
+        document.documentElement.style.setProperty('--primary-color-rgb', primaryColorRGB);
+        document.documentElement.style.setProperty('--secondary-color-rgb', secondaryColorRGB);
+    }
+
+    function openSidebar() {
+        sidebarElement.classList.add('open');
+        if (menuIconElement) menuIconElement.textContent = 'close';
+        if (window.innerWidth <= 960) { 
+            if(sidebarCloseBtnElement) sidebarCloseBtnElement.style.display = 'flex';
+            if(menuToggleBtnElement) menuToggleBtnElement.style.display = 'none'; 
+        }
+    }
+
+    function closeSidebar() {
+        sidebarElement.classList.remove('open');
+        if (menuIconElement) menuIconElement.textContent = 'menu';
+        if (window.innerWidth <= 960) {
+            if(sidebarCloseBtnElement) sidebarCloseBtnElement.style.display = 'none';
+            if(menuToggleBtnElement) menuToggleBtnElement.style.display = 'flex'; 
+        }
+    }
+
+    if(menuToggleBtnElement) {
+        menuToggleBtnElement.addEventListener('click', function(event) {
+            event.stopPropagation();
+            if (sidebarElement.classList.contains('open')) {
+                closeSidebar();
+            } else {
+                openSidebar();
+            }
+        });
+    }
+
+    if(sidebarCloseBtnElement) {
+        sidebarCloseBtnElement.addEventListener('click', function(event) {
+            event.stopPropagation();
+            closeSidebar();
+        });
+    }
+
+    function closeSidebarAndSetActive(clickedLink) {
+        const sidebarLinks = sidebarElement.querySelectorAll('.sidebar-content ul li a');
+        sidebarLinks.forEach(link => link.classList.remove('active'));
+        if(clickedLink) clickedLink.classList.add('active');
+
+        if (window.innerWidth <= 960) {
+            closeSidebar();
+        }
+    }
+    
+    document.addEventListener('click', function(event) {
+        if (sidebarElement.classList.contains('open')) {
+            const isClickInsideSidebar = sidebarElement.contains(event.target);
+            const isClickOnMenuButton = menuToggleBtnElement ? menuToggleBtnElement.contains(event.target) : false;
+
+            if (!isClickInsideSidebar && !isClickOnMenuButton) {
+                closeSidebar();
+            }
+        }
+    });
+    
+    // Автоматична прокрутка до активного елемента в сайдбарі при завантаженні
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentHash = window.location.hash;
+        if (currentHash) {
+            const activeLink = sidebarElement.querySelector(`.sidebar-content a[href="${currentHash}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+                // Прокрутка до активного елемента
+                activeLink.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        } else {
+             const firstLink = sidebarElement.querySelector('.sidebar-content ul li a');
+             if(firstLink) firstLink.classList.add('active');
+        }
+    });
+
+</script>
+
+</body>
+</html>
